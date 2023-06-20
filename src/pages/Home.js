@@ -9,7 +9,7 @@ function Home() {
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
                         <h2>Business</h2>
                         <div>
-                            <a href="category.html" className="more">
+                            <a href="#" className="more">
                                 See All Business
                             </a>
                         </div>
@@ -24,7 +24,7 @@ function Home() {
                                     <span>2023.06.20</span>
                                 </div>
                                 <h2 className="mb-2">
-                                    <a href="single-post.html">
+                                    <a href="/article/1">
                                         김기현 “국내 중국인 투표권 제한…건보
                                         ‘먹튀’도 막겠다”
                                     </a>
@@ -41,7 +41,7 @@ function Home() {
                                     <span>2023.06.20</span>
                                 </div>
                                 <h2 className="mb-2">
-                                    <a href="single-post.html">
+                                    <a href="/article/1">
                                         콜라·참치캔도 가격 올리고 버티기... 기업
                                         이익은 급증
                                     </a>
@@ -58,7 +58,7 @@ function Home() {
                                     <span>2023.06.20</span>
                                 </div>
                                 <h2 className="mb-2">
-                                    <a href="single-post.html">
+                                    <a href="/article/1">
                                         음악 듣는 사람 뇌 신호 공부한 AI, 히트곡
                                         97% 맞췄다
                                     </a>
