@@ -4,15 +4,16 @@ import { useEffect, useState } from "react";
 function Home() {
     const [ data, setData ] = useState([]);
 
-    useEffect(() => {
-        axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
-        .then(response => {
-            setData(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    }, []);
+    // useEffect(() => {
+    //     axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
+    //     .then(response => {
+    //         setData(response.data);
+    //         // console.log(response.data);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+    // }, []);
 
 
     return (
@@ -37,7 +38,10 @@ function Home() {
                                 <div className="post-meta">
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
-                                    <span>2023.06.20</span>
+                                    <span>2023.06.20</span>{" "}
+                                    <span class="badge text-bg-primary">
+                                        InsightPress
+                                    </span>
                                 </div>
                                 <h2 className="mb-2">
                                     <a href="/article/1">
@@ -54,7 +58,10 @@ function Home() {
                                 <div className="post-meta">
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
-                                    <span>2023.06.20</span>
+                                    <span>2023.06.20</span>{" "}
+                                    <span class="badge text-bg-primary">
+                                        InsightPress
+                                    </span>
                                 </div>
                                 <h2 className="mb-2">
                                     <a href="/article/1">
@@ -71,7 +78,10 @@ function Home() {
                                 <div className="post-meta">
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
-                                    <span>2023.06.20</span>
+                                    <span>2023.06.20</span>{" "}
+                                    <span class="badge text-bg-warning">
+                                        Users
+                                    </span>
                                 </div>
                                 <h2 className="mb-2">
                                     <a href="/article/1">
