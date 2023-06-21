@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Article() {
-    const [article, setArticle] = useState("");
+    const [article, setArticle] = useState({});
     const article_id = useParams().id;
+
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         axios
@@ -13,6 +15,7 @@ function Article() {
             )
             .then((data) => {
                 setArticle(JSON.parse(data.data.body));
+                console.log(JSON.parse(data.data.body));
             })
             .catch((error) => {});
     }, []);
@@ -23,8 +26,7 @@ function Article() {
                 <div className="container">
                     <div className="row">
                         <div
-                            className="col-md-12 post-content aos-init aos-animate"
-                            data-aos="fade-up"
+                            className="col-md-12 post-content"
                         >
                             {/* <!-- ======= Single Post Content ======= --> */}
                             <div className="single-post">
@@ -66,50 +68,6 @@ function Article() {
                                             itaque laudantium impedit aliquam
                                             eligendi repellendus excepturi
                                             quibusdam nobis esse accusantium.
-                                        </div>
-
-                                        <div className="comment-replies bg-light p-3 mt-3 rounded">
-                                            <h6 className="comment-replies-title mb-4 text-muted text-uppercase">
-                                                2 replies
-                                            </h6>
-
-                                            <div className="reply d-flex mb-4">
-                                                <div className="flex-grow-1 ms-2 ms-sm-3">
-                                                    <div className="reply-meta d-flex align-items-baseline">
-                                                        <h6 className="mb-0 me-2">
-                                                            Brandon Smith
-                                                        </h6>
-                                                        <span className="text-muted">
-                                                            2d
-                                                        </span>
-                                                    </div>
-                                                    <div className="reply-body">
-                                                        Lorem ipsum dolor sit,
-                                                        amet consectetur
-                                                        adipisicing elit.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="reply d-flex">
-                                                <div className="flex-grow-1 ms-2 ms-sm-3">
-                                                    <div className="reply-meta d-flex align-items-baseline">
-                                                        <h6 className="mb-0 me-2">
-                                                            James Parsons
-                                                        </h6>
-                                                        <span className="text-muted">
-                                                            1d
-                                                        </span>
-                                                    </div>
-                                                    <div className="reply-body">
-                                                        Lorem ipsum dolor sit
-                                                        amet, consectetur
-                                                        adipisicing elit.
-                                                        Distinctio dolore sed
-                                                        eos sapiente,
-                                                        praesentium.
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
