@@ -1,4 +1,20 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 function Home() {
+    const [ data, setData ] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
+        .then(response => {
+            setData(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, []);
+
+
     return (
         <>
             <section className="category-section">
