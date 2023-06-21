@@ -39,7 +39,7 @@ function Home() {
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
                                     <span>2023.06.20</span>{" "}
-                                    <span class="badge text-bg-primary">
+                                    <span className="badge text-bg-primary">
                                         InsightPress
                                     </span>
                                 </div>
@@ -59,7 +59,7 @@ function Home() {
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
                                     <span>2023.06.20</span>{" "}
-                                    <span class="badge text-bg-primary">
+                                    <span className="badge text-bg-primary">
                                         InsightPress
                                     </span>
                                 </div>
@@ -79,7 +79,7 @@ function Home() {
                                     <span className="date">Business</span>{" "}
                                     <span className="mx-1">•</span>{" "}
                                     <span>2023.06.20</span>{" "}
-                                    <span class="badge text-bg-warning">
+                                    <span className="badge text-bg-warning">
                                         Users
                                     </span>
                                 </div>
