@@ -5,10 +5,17 @@ let updatePost = createSlice({
     initialState: {},
     reducers: {
         setUpdatePost(state, action) {
-            // 기존 state
             return { ...action.payload };
         },
     },
+});
+
+const article_category = createSlice({
+    name: "article_category",
+    initialState: {
+        0: "정치",
+        1: "경제",
+    }
 });
 
 export let { setUpdatePost } = updatePost.actions;
@@ -16,5 +23,6 @@ export let { setUpdatePost } = updatePost.actions;
 export default configureStore({
     reducer: {
         updatePost: updatePost.reducer,
+        article_category: article_category.reducer,
     },
 });

@@ -1,20 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Article() {
     const [article, setArticle] = useState({
-        created_at: "2023-06-21",
+        created_at_article: "2023-06-21",
         title: '[칩톡]GPU 집중 속 "인수"로 몸집 키운 엔비디아',
         request_id: null,
         category: "0",
     });
     const article_id = useParams().id;
-
-    const article_category = {
-        0: "정치",
-        1: "경제"
-    };
+    const article_category = useSelector((state) => {
+        return state.article_category;
+    });
 
     // useEffect(() => {
     //     axios
@@ -39,9 +38,11 @@ function Article() {
                                 <div className="post-meta">
                                     <span className="date">
                                         {article_category[article.category]}
+                                    </span>
+                                    <span className="mx-1">•</span>
+                                    <span>
+                                        {article.created_at_article}
                                     </span>{" "}
-                                    <span className="mx-1">•</span>{" "}
-                                    <span>{article.created_at}</span>{" "}
                                     {article.request_id ? (
                                         <span className="badge text-bg-warning">
                                             User
