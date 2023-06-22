@@ -1,7 +1,24 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
 
 function Newpost() {
+    let navigate = useNavigate();
+
+    function addPost(event) {
+        event.preventDefault();
+        return axios
+            .post(`${process.env.REACT_APP_BOARD_API_URL}/articles`, {
+                user_id: event.target.user.value,
+                source_url: event.target.url.value,
+                category: event.target.category.value,
+            })
+            .then((res) => {
+                navigate("/");
+            })
+            .catch((err) => {
+            });
+    }
+
     return (
         <>
             <section id="contact" className="contact mb-5">
@@ -11,13 +28,12 @@ function Newpost() {
                 >
                     <div className="row">
                         <div className="col-lg-12 text-center mb-5">
-                            {/* <h1 className="page-title">New Post</h1> */}
+                            <h3 className="page-title">New Post</h3>
                         </div>
                     </div>
                     <div className="form mt-5">
                         <form
-                            // action=""
-                            method="post"
+                            onSubmit={addPost}
                             className="php-email-form"
                         >
                             <div className="row">
@@ -25,17 +41,21 @@ function Newpost() {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        placeholder="User"
+                                        placeholder="unauthorized"
+                                        defaultValue="unauthorized"
                                         aria-label="default input example"
+                                        name="user"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group col-md-6">
                                     <select
                                         className="form-select form-select-lg"
                                         aria-label="Default select example"
+                                        name="category"
                                     >
-                                        <option defaultValue="1">정치</option>
-                                        <option defaultValue="2">경제</option>
+                                        <option value="0">정치</option>
+                                        <option value="1">경제</option>
                                     </select>
                                 </div>
                             </div>
@@ -43,8 +63,9 @@ function Newpost() {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    name="subject"
-                                    id="subject"
+                                    name="url"
+                                    id="url"
+                                    required
                                     placeholder="https://n.news.naver.com/article/648/0000017271"
                                 />
                             </div>
