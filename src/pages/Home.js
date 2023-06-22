@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const [articles, setArticles] = useState([]);
-  const [hoveredState, setHoveredState] = useState({}); // 각 제목의 마우스 hover 상태를 저장하는 객체
+  const [hoveredTitles, setHoveredTitles] = useState({}); // 각 제목의 마우스 hover 상태를 저장하는 객체
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
@@ -17,11 +17,11 @@ function Home() {
   }, []);
 
   const handleMouseEnter = (id) => {
-    setHoveredState(prevState => ({ ...prevState, [id]: true })); // 해당 id의 제목의 hover 상태를 true로 설정
+    setHoveredTitles(prevState => ({ ...prevState, [id]: true })); // 해당 id의 제목의 hover 상태를 true로 설정
   };
 
   const handleMouseLeave = (id) => {
-    setHoveredState(prevState => ({ ...prevState, [id]: false })); // 해당 id의 제목의 hover 상태를 false로 설정
+    setHoveredTitles(prevState => ({ ...prevState, [id]: false })); // 해당 id의 제목의 hover 상태를 false로 설정
   };
 
   const linkStyle = {
@@ -29,22 +29,23 @@ function Home() {
     padding: "4px 8px",
     color: "inherit",
   };
-  
+
   const seeAllLinkStyle = {
     ...linkStyle,
     textDecoration: "none",
     color: "inherit",
-    backgroundColor: hoveredState["seeAll"] ? "rgba(200, 200, 200, 0.3)" : "transparent",
+    backgroundColor: hoveredTitles["seeAll"] ? "rgba(200, 200, 200, 0.3)" : "transparent",
   };
-  
-  const getLinkStyle = (id) => ({
+
+  const getTitleLinkStyle = (id) => ({
     ...linkStyle,
-    textDecoration: hoveredState[id] ? "underline" : "none",
+    textDecoration: hoveredTitles[id] ? "underline" : "none",
   });
-  
-  const getTitleLinkStyle = getLinkStyle;
-  const getArticleLinkStyle = getLinkStyle;
-  
+
+  const getArticleLinkStyle = (id) => ({
+    ...linkStyle,
+    textDecoration: hoveredTitles[id] ? "underline" : "none",
+  });
 
   // ...
 
