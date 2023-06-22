@@ -1,19 +1,44 @@
 import axios from "axios";
 import { useNavigate} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Newpost() {
     let navigate = useNavigate();
+    let updatePost = useSelector((state) => {
+        return state.updatePost;
+    });
+    const guide = updatePost.id ? "Update" : "New Post";
 
     function addPost(event) {
         event.preventDefault();
         return axios
-            .post(`${process.env.REACT_APP_BOARD_API_URL}/articles`, {
-                user_id: event.target.user.value,
-                source_url: event.target.url.value,
-                category: event.target.category.value,
-            })
+            .post(
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
+                {
+                    user_id: event.target.user.value,
+                    source_url: event.target.url.value,
+                    category: event.target.category.value,
+                }
+            )
             .then((res) => {
-                navigate("/");
+                navigate("/postqueue");
+            })
+            .catch((err) => {});
+    }
+
+    function handlerUpdate(event) {
+        event.preventDefault();
+        return axios
+            .put(
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
+                {
+                    id: updatePost.id,
+                    source_url: event.target.url.value,
+                    category: event.target.category.value,
+                }
+            )
+            .then((res) => {
+                navigate("/postqueue");
             })
             .catch((err) => {
             });
@@ -28,31 +53,41 @@ function Newpost() {
                 >
                     <div className="row">
                         <div className="col-lg-12 text-center mb-5">
-                            <h3 className="page-title">New Post</h3>
+                            <h3 className="page-title">{guide}</h3>
                         </div>
                     </div>
                     <div className="form mt-5">
+                        <form></form>
+
                         <form
-                            onSubmit={addPost}
+                            onSubmit={updatePost.id ? handlerUpdate : addPost}
                             className="php-email-form"
                         >
                             <div className="row">
                                 <div className="form-group col-md-6">
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        placeholder="unauthorized"
-                                        defaultValue="unauthorized"
-                                        aria-label="default input example"
-                                        name="user"
-                                        required
-                                    />
+                                    <fieldset
+                                        disabled={
+                                            updatePost.id ? true : false
+                                        }
+                                    >
+                                        <input
+                                            className="form-control"
+                                            id="disabledTextInput"
+                                            type="text"
+                                            placeholder="unauthorized"
+                                            defaultValue={updatePost.user_id}
+                                            aria-label="default input example"
+                                            name="user"
+                                            required
+                                        />
+                                    </fieldset>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <select
                                         className="form-select form-select-lg"
                                         aria-label="Default select example"
                                         name="category"
+                                        defaultValue={updatePost.category}
                                     >
                                         <option value="0">정치</option>
                                         <option value="1">경제</option>
@@ -67,10 +102,11 @@ function Newpost() {
                                     id="url"
                                     required
                                     placeholder="https://n.news.naver.com/article/648/0000017271"
+                                    defaultValue={updatePost.source_url}
                                 />
                             </div>
                             <div className="text-center">
-                                <button type="submit">New Post</button>
+                                <button type="submit">{guide}</button>
                             </div>
                         </form>
                     </div>

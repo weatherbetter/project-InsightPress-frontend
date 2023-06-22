@@ -16,16 +16,6 @@ function Article() {
         1: "경제"
     };
 
-    const article_edit = ()=>{
-        console.log(article_id);
-        // axios
-        //     .put("", { id: article_id, source_url: "" })
-        //     .then((data) => {
-        //         console.log(data);
-        //     })
-        //     .catch((error) => {});
-    }
-
     // useEffect(() => {
     //     axios
     //         .get(

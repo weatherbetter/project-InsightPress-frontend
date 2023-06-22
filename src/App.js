@@ -12,6 +12,7 @@ function App() {
                 <Route path="/" element={<Home></Home>} />
                 <Route path="/article/:id" element={<Article></Article>} />
                 <Route path="/newpost" element={<Newpost></Newpost>} />
+                <Route path="/updatepost" element={<Newpost></Newpost>} />
                 <Route path="/postqueue" element={<PostQueue></PostQueue>} />
                 <Route path="*" element={<div>404</div>} />
             </Routes>
