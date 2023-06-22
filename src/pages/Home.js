@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const [articles, setArticles] = useState([]);
-  const [hoveredState, setHoveredState] = useState({
-    title: false,
-    article: false,
-    seeAll: false,
-  });
+  const [hoveredState, setHoveredState] = useState({}); // 각 제목의 마우스 hover 상태를 저장하는 객체
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
@@ -20,12 +16,12 @@ function Home() {
       });
   }, []);
 
-  const handleMouseEnter = (key) => {
-    setHoveredState(prevState => ({ ...prevState, [key]: true }));
+  const handleMouseEnter = (id) => {
+    setHoveredState(prevState => ({ ...prevState, [id]: true })); // 해당 id의 제목의 hover 상태를 true로 설정
   };
 
-  const handleMouseLeave = (key) => {
-    setHoveredState(prevState => ({ ...prevState, [key]: false }));
+  const handleMouseLeave = (id) => {
+    setHoveredState(prevState => ({ ...prevState, [id]: false })); // 해당 id의 제목의 hover 상태를 false로 설정
   };
 
   const linkStyle = {
@@ -33,23 +29,24 @@ function Home() {
     padding: "4px 8px",
     color: "inherit",
   };
-
-  const titleLinkStyle = {
-    ...linkStyle,
-    textDecoration: hoveredState.title ? "underline" : "none",
-  };
-
-  const articleLinkStyle = {
-    ...linkStyle,
-    textDecoration: hoveredState.article ? "underline" : "none",
-  };
-
+  
   const seeAllLinkStyle = {
     ...linkStyle,
     textDecoration: "none",
     color: "inherit",
-    backgroundColor: hoveredState.seeAll ? "rgba(200, 200, 200, 0.3)" : "transparent",
+    backgroundColor: hoveredState["seeAll"] ? "rgba(200, 200, 200, 0.3)" : "transparent",
   };
+  
+  const getLinkStyle = (id) => ({
+    ...linkStyle,
+    textDecoration: hoveredState[id] ? "underline" : "none",
+  });
+  
+  const getTitleLinkStyle = getLinkStyle;
+  const getArticleLinkStyle = getLinkStyle;
+  
+
+  // ...
 
   return (
     <>
@@ -72,21 +69,17 @@ function Home() {
 
           <div className="row">
             <div className="col-md-12">
-              {articles.map((article) => (
+              {articles.map((article, index) => (
                 <div className="post-entry-1 border-bottom" key={article.id}>
                   <div className="post-meta">
-                    <span className="date">{article.category}</span>
-                    <span className="mx-1">•</span>
-                    <span>{article.created_at}</span>
-                    <span className="mx-5" />
-                    <span>{article.request_id}</span>
+                    {/* post-meta 내용 */}
                   </div>
                   <h2 className="mb-2">
                     <Link
                       to={`/article/${article.id}`}
-                      style={titleLinkStyle}
-                      onMouseEnter={() => handleMouseEnter("title")}
-                      onMouseLeave={() => handleMouseLeave("title")}
+                      style={getTitleLinkStyle(`${article.id}-title`)}
+                      onMouseEnter={() => handleMouseEnter(`${article.id}-title`)}
+                      onMouseLeave={() => handleMouseLeave(`${article.id}-title`)}
                     >
                       {article.title}
                     </Link>
@@ -96,9 +89,9 @@ function Home() {
                     className="author mb-3 d-block small"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={articleLinkStyle}
-                    onMouseEnter={() => handleMouseEnter("article")}
-                    onMouseLeave={() => handleMouseLeave("article")}
+                    style={getArticleLinkStyle(`${article.id}-source`)}
+                    onMouseEnter={() => handleMouseEnter(`${article.id}-source`)}
+                    onMouseLeave={() => handleMouseLeave(`${article.id}-source`)}
                   >
                     original article
                   </a>
