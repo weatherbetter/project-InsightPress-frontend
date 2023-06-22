@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 function Home() {
     const [data, setData] = useState([]);
 
-    // useEffect(() => {
-    //     axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
-    //     .then(response => {
-    //         setData(response.data);
-    //         // console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-    // }, []);
+    useEffect(() => {
+        axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
+        .then(response => {
+            setData(response.data);
+            // console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, []);
 
     return (
         <>
