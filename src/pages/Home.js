@@ -9,7 +9,7 @@ function Home() {
         axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
         .then(response => {
             setData(response.data);
-            // console.log(response.data);
+            console.log(response.data);
         })
         .catch(error => {
             console.error(error);
@@ -31,16 +31,15 @@ function Home() {
 
                     <div className="row">
                         <div className="col-md-12">
-
                             {data.map((d) => (
                                 <div className="post-entry-1 border-bottom" key={d.id}>
                                     <div className="post-meta">
-                                        <span className="date">{d.field}</span>
+                                        <span className="date">{d.date}</span>
                                         <span className="mx-1">•</span>
-                                        <span>{d.date}</span>
+                                        <span>{d.title}</span>
                                     </div>
                                     <h2 className="mb-2">
-                                        <Link to={`/article/${d.id}`}>{d.title}</Link>
+                                        <Link to={`/article/${d.id}`}>{d.content}</Link>
                                     </h2>
                                     <span className="author mb-3 d-block">네이버 기사</span>
                                 </div>
