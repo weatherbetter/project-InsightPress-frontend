@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
 function Home() {
-    const [data, setData] = useState([]);
+    const [articles, setArticles] = useState([]);
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
         .then(response => {
-            setData(response.data);
-            console.log(response.data);
+            setArticles(JSON.parse(response.data.body));
+            console.log(JSON.parse(response.data.body));
         })
         .catch(error => {
             console.error(error);
@@ -19,7 +19,10 @@ function Home() {
     return (
         <>
             <section className="category-section">
-                <div className="container aos-init aos-animate" data-aos="fade-up">
+                <div
+                    className="container aos-init aos-animate"
+                    data-aos="fade-up"
+                >
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
                         <h2>Business</h2>
                         <div>
@@ -31,26 +34,32 @@ function Home() {
 
                     <div className="row">
                         <div className="col-md-12">
-                            {data.map((d) => (
-                                <div className="post-entry-1 border-bottom" key={d.id}>
+                            {articles.map((article) => (
+                                <div
+                                    className="post-entry-1 border-bottom"
+                                    key={article.id}
+                                >
                                     <div className="post-meta">
-                                        <span className="date">{d.date}</span>
+                                        <span className="date">
+                                            {article.date}
+                                        </span>
                                         <span className="mx-1">•</span>
-                                        <span>{d.title}</span>
+                                        <span>{article.title}</span>
                                     </div>
                                     <h2 className="mb-2">
-                                        <Link to={`/article/${d.id}`}>{d.content}</Link>
+                                        <Link to={`/article/${article.id}`}>
+                                            {article.content}
+                                        </Link>
                                     </h2>
-                                    <span className="author mb-3 d-block">네이버 기사</span>
+                                    <span className="author mb-3 d-block">
+                                        네이버 기사
+                                    </span>
                                 </div>
                             ))}
-                            
-
                         </div>
                     </div>
                 </div>
             </section>
-
             href
         </>
     );
