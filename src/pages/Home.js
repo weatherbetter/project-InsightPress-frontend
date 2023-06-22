@@ -6,7 +6,7 @@ function Home() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get("https://303c43lyua.execute-api.eu-west-1.amazonaws.com/production")
+        axios.get(`${process.env.REACT_APP_BOARD_API_URL}/article`)
         .then(response => {
             setData(response.data);
             console.log(response.data);
