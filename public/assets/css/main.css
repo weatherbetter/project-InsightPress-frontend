@@ -1298,3 +1298,7 @@ section {
 .footer .credits a {
   color: var(--color-white);
 }
+
+div.post-entry-1 a:hover{
+     text-decoration : underline;
+}
