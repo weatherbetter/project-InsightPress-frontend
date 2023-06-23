@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Newpost() {
@@ -40,8 +40,7 @@ function Newpost() {
             .then((res) => {
                 navigate("/postqueue");
             })
-            .catch((err) => {
-            });
+            .catch((err) => {});
     }
 
     return (
@@ -66,9 +65,7 @@ function Newpost() {
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <fieldset
-                                        disabled={
-                                            updatePost.id ? true : false
-                                        }
+                                        disabled={updatePost.id ? true : false}
                                     >
                                         <input
                                             className="form-control"

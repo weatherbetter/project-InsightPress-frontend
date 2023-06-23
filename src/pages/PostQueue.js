@@ -11,8 +11,7 @@ const article_category = {
 };
 
 function PostQueue() {
-    const [requestQueues, setRequestQueues] = useState([
-    ]);
+    const [requestQueues, setRequestQueues] = useState([]);
     let dispatch = useDispatch();
     let navigate = useNavigate();
 
