@@ -1,127 +1,120 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setUpdatePost } from "../store.js";
-
-const article_category = {
-    0: "정치",
-    1: "경제",
-    };
+import { useNavigate} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Newpost() {
-    let history = useHistory();
+    let navigate = useNavigate();
     let updatePost = useSelector((state) => {
-    return state.updatePost;
+        return state.updatePost;
     });
-
     const guide = updatePost.id ? "Update" : "New Post";
 
-function addPost(event) {
-    event.preventDefault();
-    return axios
-        .post(
-            `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
-            {
-                user_id: event.target.user.value,
-                source_url: event.target.url.value,
-                category: event.target.category.value,
-            }
-        )
-        .then((res) => {
-            history.push("/postqueue");
-        })
-        .catch((err) => {});
-}
+    function addPost(event) {
+        event.preventDefault();
+        return axios
+            .post(
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
+                {
+                    user_id: event.target.user.value,
+                    source_url: event.target.url.value,
+                    category: event.target.category.value,
+                }
+            )
+            .then((res) => {
+                navigate("/postqueue");
+            })
+            .catch((err) => {});
+    }
 
-function handlerUpdate(event) {
-    event.preventDefault();
-    return axios
-        .put(
-            `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
-            {
-                id: updatePost.id,
-                source_url: event.target.url.value,
-                category: event.target.category.value,
-            }
-        )
-        .then((res) => {
-            history.push("/postqueue");
-        })
-        .catch((err) => {});
-}
+    function handlerUpdate(event) {
+        event.preventDefault();
+        return axios
+            .put(
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
+                {
+                    id: updatePost.id,
+                    source_url: event.target.url.value,
+                    category: event.target.category.value,
+                }
+            )
+            .then((res) => {
+                navigate("/postqueue");
+            })
+            .catch((err) => {
+            });
+    }
 
-return (
-    <>
-        <section id="contact" className="contact mb-5">
-            <div
-                className="container aos-init aos-animate"
-                data-aos="fade-up"
-            >
-                <div className="row">
-                    <div className="col-lg-12 text-center mb-5">
-                        <h3 className="page-title">{guide}</h3>
+    return (
+        <>
+            <section id="contact" className="contact mb-5">
+                <div
+                    className="container aos-init aos-animate"
+                    data-aos="fade-up"
+                >
+                    <div className="row">
+                        <div className="col-lg-12 text-center mb-5">
+                            <h3 className="page-title">{guide}</h3>
+                        </div>
                     </div>
-                </div>
-                <div className="form mt-5">
-                    <form></form>
+                    <div className="form mt-5">
+                        <form></form>
 
-                    <form
-                        onSubmit={updatePost.id ? handlerUpdate : addPost}
-                        className="php-email-form"
-                    >
-                        <div className="row">
-                            <div className="form-group col-md-6">
-                                <fieldset
-                                    disabled={
-                                        updatePost.id ? true : false
-                                    }
-                                >
-                                    <input
-                                        className="form-control"
-                                        id="disabledTextInput"
-                                        type="text"
-                                        placeholder="unauthorized"
-                                        defaultValue={updatePost.user_id}
-                                        aria-label="default input example"
-                                        name="user"
-                                        required
-                                    />
-                                </fieldset>
+                        <form
+                            onSubmit={updatePost.id ? handlerUpdate : addPost}
+                            className="php-email-form"
+                        >
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <fieldset
+                                        disabled={
+                                            updatePost.id ? true : false
+                                        }
+                                    >
+                                        <input
+                                            className="form-control"
+                                            id="disabledTextInput"
+                                            type="text"
+                                            placeholder="unauthorized"
+                                            defaultValue={updatePost.user_id}
+                                            aria-label="default input example"
+                                            name="user"
+                                            required
+                                        />
+                                    </fieldset>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <select
+                                        className="form-select form-select-lg"
+                                        aria-label="Default select example"
+                                        name="category"
+                                        defaultValue={updatePost.category}
+                                    >
+                                        <option value="0">정치</option>
+                                        <option value="1">경제</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div className="form-group col-md-6">
-                                <select
-                                    className="form-select form-select-lg"
-                                    aria-label="Default select example"
-                                    name="category"
-                                    defaultValue={updatePost.category}
-                                >
-                                    <option value="0">정치</option>
-                                    <option value="1">경제</option>
-                                </select>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="url"
+                                    id="url"
+                                    required
+                                    placeholder="https://n.news.naver.com/article/648/0000017271"
+                                    defaultValue={updatePost.source_url}
+                                />
                             </div>
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="url"
-                                id="url"
-                                required
-                                placeholder="https://n.news.naver.com/article/648/0000017271"
-                                defaultValue={updatePost.source_url}
-                            />
-                        </div>
-                        <div className="text-center">
-                            <button type="submit">{guide}</button>
-                        </div>
-                    </form>
+                            <div className="text-center">
+                                <button type="submit">{guide}</button>
+                            </div>
+                        </form>
+                    </div>
+                    {/* <!-- End Contact Form --> */}
                 </div>
-                {/* <!-- End Contact Form --> */}
-            </div>
-        </section>
-    </>
-  );
+            </section>
+        </>
+    );
 }
 
 export default Newpost;
