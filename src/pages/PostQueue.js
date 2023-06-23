@@ -22,7 +22,7 @@ function PostQueue() {
             )
             .then((res) => {
                 requestQueues.splice(
-                    requestQueues.findIndex((item) => item.id === id),
+                    requestQueues.findIndex((item) => item.request_id === id),
                     1
                 );
                 setRequestQueues([...requestQueues]);
@@ -32,7 +32,8 @@ function PostQueue() {
 
     const handlerUpdate = (resQueue) => {
         dispatch(setUpdatePost(resQueue));
-        navigate("/updatepost");
+        console.log(resQueue);
+        navigate(`/updatepost/${resQueue.request_id}`);
     };
 
     useEffect(() => {
@@ -41,7 +42,8 @@ function PostQueue() {
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`
             )
             .then((response) => {
-                setRequestQueues(JSON.parse(response.data.body));
+                setRequestQueues(response.data.body);
+                console.log(response.data.body);
             })
             .catch((error) => {});
     }, []);
@@ -103,7 +105,9 @@ function PostQueue() {
                                             |{" "}
                                             <button
                                                 onClick={() =>
-                                                    handlerDelete(resQueue.id)
+                                                    handlerDelete(
+                                                        resQueue.request_id
+                                                    )
                                                 }
                                                 type="button"
                                                 className="btn btn-outline-danger"
