@@ -11,6 +11,7 @@ function Home() {
     //   const [hoveredState, setHoveredState] = useState({}); // 각 제목의 마우스 hover 상태를 저장하는 객체
 
     useEffect(() => {
+        console.log(`${process.env.REACT_APP_BOARD_API_URL}/articles`);
         axios
             .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
             .then((response) => {

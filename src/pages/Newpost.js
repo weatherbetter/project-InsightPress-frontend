@@ -7,7 +7,7 @@ function Newpost() {
     let updatePost = useSelector((state) => {
         return state.updatePost;
     });
-    const guide = updatePost.id ? "Update" : "New Post";
+    const guide = updatePost.request_id ? "Update" : "New Post";
 
     function addPost(event) {
         event.preventDefault();
@@ -30,9 +30,8 @@ function Newpost() {
         event.preventDefault();
         return axios
             .put(
-                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests/${updatePost.request_id}`,
                 {
-                    id: updatePost.id,
                     source_url: event.target.url.value,
                     category: event.target.category.value,
                 }
@@ -59,13 +58,17 @@ function Newpost() {
                         <form></form>
 
                         <form
-                            onSubmit={updatePost.id ? handlerUpdate : addPost}
+                            onSubmit={
+                                updatePost.request_id ? handlerUpdate : addPost
+                            }
                             className="php-email-form"
                         >
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <fieldset
-                                        disabled={updatePost.id ? true : false}
+                                        disabled={
+                                            updatePost.request_id ? true : false
+                                        }
                                     >
                                         <input
                                             className="form-control"
