@@ -5,27 +5,27 @@ import { useSelector } from "react-redux";
 
 function Article() {
     const [article, setArticle] = useState({
-        created_at_article: "2023-06-21",
-        title: '[칩톡]GPU 집중 속 "인수"로 몸집 키운 엔비디아',
-        request_id: null,
-        category: "0",
+        // created_at_article: "2023-06-21",
+        // title: '[칩톡]GPU 집중 속 "인수"로 몸집 키운 엔비디아',
+        // request_id: null,
+        // category: "0",
     });
     const article_id = useParams().id;
     const article_category = useSelector((state) => {
         return state.article_category;
     });
 
-    // useEffect(() => {
-    //     axios
-    //         .get(
-    //             `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
-    //         )
-    //         .then((response) => {
-    //             console.log(JSON.parse(response.data.body));
-    //             setArticle(JSON.parse(response.data.body));
-    //         })
-    //         .catch((error) => {});
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(
+                `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
+            )
+            .then((response) => {
+                console.log(JSON.parse(response.data.body));
+                setArticle(JSON.parse(response.data.body));
+            })
+            .catch((error) => {});
+    }, []);
 
     return (
         <>
@@ -58,14 +58,14 @@ function Article() {
                                     className="alert alert-primary"
                                     role="alert"
                                 >
-                                    {/* {article.gpt_content} */}
+                                    {article.gpt_content}
                                 </div>
                                 {/* Start news content*/}
-                                {/* <div
+                                <div
                                     dangerouslySetInnerHTML={{
                                         __html: article.content_html,
                                     }}
-                                ></div> */}
+                                ></div>
                                 {/* {article.content} */}
                                 {/* End news content*/}
                             </div>
