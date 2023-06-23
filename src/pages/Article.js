@@ -21,8 +21,7 @@ function Article() {
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
             )
             .then((response) => {
-                console.log(JSON.parse(response.data.body));
-                setArticle(JSON.parse(response.data.body));
+                setArticle(response.data.body);
             })
             .catch((error) => {});
     }, []);
