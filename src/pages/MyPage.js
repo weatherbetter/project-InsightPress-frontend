@@ -28,7 +28,7 @@ function MyPage() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BOARD_API_URL}/mypage`)
+      .get(`${process.env.REACT_APP_BOARD_API_URL}/auth/login/mypage`)
       .then((response) => {
         setRequestQueues(JSON.parse(response.data.body));
       })
