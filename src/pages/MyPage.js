@@ -6,6 +6,7 @@ import Withdraw from './Withdraw.js';
 
 function MyPage() {
   const [requestQueues, setRequestQueues] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Example user information
   const users = {
@@ -31,9 +32,16 @@ function MyPage() {
       .get(`${process.env.REACT_APP_BOARD_API_URL}/auth/login/mypage`)
       .then((response) => {
         setRequestQueues(JSON.parse(response.data.body));
+        setIsLoggedIn(true);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setIsLoggedIn(false);
+      });
   }, []);
+
+  if (!isLoggedIn) {
+    return <div>Please Login</div>;
+  }
 
   return (
     <div>
