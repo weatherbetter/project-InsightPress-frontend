@@ -5,7 +5,7 @@ const WithdrawPage = ({ onWithdraw }) => {
   useEffect(() => {
     const deleteAccount = async () => {
       try {
-        await axios.delete(`${process.env.REACT_APP_BOARD_API_URL}/articles`);
+        await axios.delete(`${process.env.REACT_APP_BOARD_API_URL}/auth/login/withdraw`);
         console.log('Account deletion successful');
         onWithdraw(); // Call the onWithdraw callback to perform additional actions if needed
       } catch (error) {
