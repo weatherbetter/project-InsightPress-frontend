@@ -10,6 +10,7 @@ const Login = () => {
   const handleChangeId = (e) => setId(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
   const handleLogin = (e) => {
+    e.preventDefault(); // Prevent form submission
     const data = {
       userid: id,
       password: password,
@@ -22,12 +23,20 @@ const Login = () => {
         if (res.data.statusCode === 200) {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
           navigate('/');
+          document.getElementById("showInputData").textContent = `ID: ${id} | PW: ${password}`; // Show input data
+          alert('Welcome to InsightPress!');
         } else {
           sessionStorage.clear();
           alert('No User Found. Please Try Again.');
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(e);
+    }
   };
 
   return (
@@ -44,7 +53,7 @@ const Login = () => {
         ID: <input type="text" value={id} onChange={handleChangeId} />
         <br />
         PW:{" "}
-        <input type="password" value={password} onChange={handleChangePassword} />
+        <input type="password" value={password} onChange={handleChangePassword} onKeyPress={handleKeyPress} />
         <br />
         <button onClick={handleLogin}>Login</button>
       </div>
