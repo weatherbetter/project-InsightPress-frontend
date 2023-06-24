@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleChangeId = (e) => setId(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
   const handleLogin = (e) => {
     const data = {
-      userid: id, // Corrected field name from 'id' to 'userid'
+      userid: id,
       password: password,
     };
 
@@ -17,15 +19,12 @@ const Login = () => {
       .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/login`, data)
       .then((res) => {
         console.log(res);
-        if (res.status === 200) {
-          // 로그인 성공 시 처리
-          console.log("Login successful!");
-          return true;
+        if (res.data.statusCode === 200) {
+          sessionStorage.setItem("JWT_TOKEN", res.data.body);
+          navigate('/');
         } else {
-          // 로그인 실패 시 처리
-          console.log("Login failed!");
-          document.getElementById("showInputData").innerHTML =
-            "Account Not Found: Try Again!";
+          sessionStorage.clear();
+          alert('로그인에 실패했습니다.');
         }
       })
       .catch((err) => console.log(err));
