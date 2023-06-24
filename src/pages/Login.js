@@ -17,11 +17,13 @@ const Login = () => {
       .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/login`, data)
       .then((res) => {
         console.log(res);
-        if (res.data.success) {
+        if (res.status === 200) {
           // 로그인 성공 시 처리
+          console.log("Login successful!");
           return true;
         } else {
           // 로그인 실패 시 처리
+          console.log("Login failed!");
           document.getElementById("showInputData").innerHTML =
             "Account Not Found: Try Again!";
         }
@@ -42,7 +44,8 @@ const Login = () => {
       <div>
         ID: <input type="text" value={id} onChange={handleChangeId} />
         <br />
-        PW: <input type="password" value={password} onChange={handleChangePassword} />
+        PW:{" "}
+        <input type="password" value={password} onChange={handleChangePassword} />
         <br />
         <button onClick={handleLogin}>Login</button>
       </div>
