@@ -8,7 +8,7 @@ const EditPage = ({ userInfo, onSave, onCancel }) => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/editpage`, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/login/mypage/{int:id}`, {
         username,
         email,
         password
