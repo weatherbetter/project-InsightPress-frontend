@@ -23,8 +23,7 @@ function Home() {
         <>
             <section className="category-section">
                 <div
-                    className="container aos-init aos-animate"
-                    data-aos="fade-up"
+                    className="container"
                 >
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
                         <h2>Business</h2>

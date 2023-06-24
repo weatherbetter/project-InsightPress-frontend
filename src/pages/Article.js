@@ -22,7 +22,6 @@ function Article() {
             )
             .then((response) => {
                 setArticle(JSON.parse(response.data.body));
-                console.log(JSON.parse(response.data.body));
             })
             .catch((error) => {});
     }, []);
