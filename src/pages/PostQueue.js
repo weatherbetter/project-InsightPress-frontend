@@ -11,39 +11,45 @@ const article_category = {
 
 function PostQueue() {
   const [requestQueues, setRequestQueues] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Add isLoggedIn state
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests/${id}`)
-      .then((res) => {
-        const updatedRequestQueues = requestQueues.filter((item) => item.request_id !== id);
-        setRequestQueues(updatedRequestQueues);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleUpdate = (resQueue) => {
-    dispatch(setUpdatePost(resQueue));
-    navigate(`/updatepost/${resQueue.request_id}`);
-  };
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`)
+      .get(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`, {
+        headers: { Authorization: sessionStorage.getItem("JWT_TOKEN") },
+      })
       .then((response) => {
         setRequestQueues(response.data.body);
+        setIsLoggedIn(true); // Set isLoggedIn to true if request is successful
       })
       .catch((error) => {
         console.log(error);
+        if (error.response && error.response.status === 403) {
+          // If the user is not logged in, redirect them to the login page.
+          navigate("/login");
+        } else {
+          alert(error.response.message);
+          navigate("/login");
+        }
       });
   }, []);
 
+  const handleUpdate = (resQueue) => {
+    // Define handleUpdate logic
+    console.log("Update action triggered");
+    // Additional logic for handling the update action
+  };
+
+  const handleDelete = (requestId) => {
+    // Define handleDelete logic
+    console.log("Delete action triggered");
+    // Additional logic for handling the delete action
+  };
+
   if (!isLoggedIn) {
+    // If the user is not logged in, show a message prompting them to log in.
     return <div>Please Login to See This Page.</div>;
   }
 
