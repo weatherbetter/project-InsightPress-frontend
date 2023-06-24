@@ -24,7 +24,7 @@ const Login = () => {
           navigate('/');
         } else {
           sessionStorage.clear();
-          alert('로그인에 실패했습니다.');
+          alert('No User Found. Please Try Again.');
         }
       })
       .catch((err) => console.log(err));
