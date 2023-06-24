@@ -19,22 +19,12 @@ const Login = () => {
       .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/login`, data)
       .then((res) => {
         console.log(res);
-<<<<<<< HEAD
         if (res.data.statusCode === 200) {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
           navigate('/');
         } else {
           sessionStorage.clear();
           alert('로그인에 실패했습니다.');
-=======
-        if (res.data.success) {
-          // 로그인 성공 시 처리
-          return true;
-        } else {
-          // 로그인 실패 시 처리
-          document.getElementById("showInputData").innerHTML =
-            "Account Not Found: Try Again!";
->>>>>>> parent of fb50930 (refactor: 로그인 성공 시 200 반환하도록 수정)
         }
       })
       .catch((err) => console.log(err));
@@ -53,7 +43,8 @@ const Login = () => {
       <div>
         ID: <input type="text" value={id} onChange={handleChangeId} />
         <br />
-        PW: <input type="password" value={password} onChange={handleChangePassword} />
+        PW:{" "}
+        <input type="password" value={password} onChange={handleChangePassword} />
         <br />
         <button onClick={handleLogin}>Login</button>
       </div>
