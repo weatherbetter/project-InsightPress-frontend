@@ -1,23 +1,43 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import qs from "qs";
 
-function Home() {
-    const [articles, setArticles] = useState([]);
+function ArticleCategory() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    console.log(searchParams.get("category"));
+    const [articles, setArticles] = useState([
+        {
+            article_id: "3dbds",
+            category: 0,
+            created_at_article: "2023-06-21",
+            title: '[칩톡]GPU 집중 속 "인수"로 몸집 키운 엔비디아',
+            source_url:
+                "https://n.news.naver.com/mnews/hotissue/article/277/0005274196?type=series&cid=1089768",
+        },
+        {
+            article_id: "3dbds",
+            category: 0,
+            created_at_article: "2023-06-21",
+            title: '[칩톡]GPU 집중 속 "인수"로 몸집 키운 엔비디아',
+            source_url:
+                "https://n.news.naver.com/mnews/hotissue/article/277/0005274196?type=series&cid=1089768",
+        },
+    ]);
     const article_category = useSelector((state) => {
         return state.article_category;
     });
 
-    useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
-            .then((response) => {
-                console.log(JSON.parse(response.data.body));
-                setArticles(JSON.parse(response.data.body));
-            })
-            .catch((error) => {});
-    }, []);
+    // useEffect(() => {
+    //     axios
+    //         .get(`${process.env.REACT_APP_BOARD_API_URL}/articles?$category=${searchParams.get("category")}`)
+    //         .then((response) => {
+    //            console.log(response);
+    //             // setArticles(response.data.body);
+    //         })
+    //         .catch((error) => {});
+    // }, []);
 
     return (
         <>
@@ -27,15 +47,7 @@ function Home() {
                     data-aos="fade-up"
                 >
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
-                        <h2>Business</h2>
-                        <div>
-                            <a
-                                href="#"
-                                className="more"
-                            >
-                                See All Business
-                            </a>
-                        </div>
+                        <h2>Politics</h2>
                     </div>
 
                     <div className="row">
@@ -65,7 +77,7 @@ function Home() {
                                     </div>
                                     <h2 className="mb-2">
                                         <Link
-                                            to={`/article/${article.id}`}
+                                            to={`/article/${article.article_id}`}
                                         >
                                             {article.title}
                                         </Link>
@@ -88,4 +100,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default ArticleCategory;
