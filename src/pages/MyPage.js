@@ -5,15 +5,7 @@ import EditPage from './EditPage.js';
 import Withdraw from './Withdraw.js';
 
 function MyPage() {
-  const [requestQueues, setRequestQueues] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Example user information
-  const users = {
-    userid: 'example_userid',
-    username: 'John Doe',
-    email: 'johndoe@example.com',
-  };
+  const [userInfo, setUserInfo] = useState(null);
 
   const handleEdit = () => {
     // Navigate to the edit page
@@ -31,25 +23,26 @@ function MyPage() {
     axios
       .get(`${process.env.REACT_APP_BOARD_API_URL}/auth/login/mypage`)
       .then((response) => {
-        setRequestQueues(JSON.parse(response.data.body));
-        setIsLoggedIn(true);
+        setUserInfo(response.data);
       })
       .catch((error) => {
-        setIsLoggedIn(false);
+        setUserInfo(null);
       });
   }, []);
 
-  if (!isLoggedIn) {
+  if (!userInfo) {
     return <div>Please Login</div>;
   }
+
+  const { id, username, email, password } = userInfo; // Assuming the field names in the users table
 
   return (
     <div>
       <h2>My Page</h2>
-      <p> Id: {users.userid}</p>
-      <p> username: {users.username}</p>
-      <p> email: {users.email}</p> 
-      <p> password: {users.password} </p>
+      <p>Id: {id}</p>
+      <p>username: {username}</p>
+      <p>email: {email}</p>
+      <p>password: {password}</p>
       <button onClick={handleEdit}>
         <Link to="/EditPage">Edit My Page</Link>
       </button>

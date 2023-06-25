@@ -34,7 +34,7 @@ function Home() {
 
                     <div className="row">
                         <div className="col-md-12">
-                            {articles.map((article, index) => (
+                            {Array.isArray(articles) && articles.map((article, index) => (
                                 <div
                                     className="post-entry-1 border-bottom"
                                     key={index}
