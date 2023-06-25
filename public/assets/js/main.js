@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
    * Mobile nav toggle
    */
 
+    function mobileNavToogle() {
+        document.querySelector("body").classList.toggle("mobile-nav-active");
+        mobileNavToogleButton.classList.toggle("bi-list");
+        mobileNavToogleButton.classList.toggle("bi-x");
+    }
+
   const mobileNavToogleButton = document.querySelector('.mobile-nav-toggle');
 
   if (mobileNavToogleButton) {
@@ -29,12 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       mobileNavToogle();
     });
-  }
-
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToogleButton.classList.toggle('bi-list');
-    mobileNavToogleButton.classList.toggle('bi-x');
   }
 
   /**
@@ -115,40 +115,40 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Open and close the search form.
    */
-  const searchOpen = document.querySelector('.js-search-open');
-  const searchClose = document.querySelector('.js-search-close');
-  const searchWrap = document.querySelector(".js-search-form-wrap");
+//   const searchOpen = document.querySelector('.js-search-open');
+//   const searchClose = document.querySelector('.js-search-close');
+//   const searchWrap = document.querySelector(".js-search-form-wrap");
 
-  searchOpen.addEventListener("click", (e) => {
-    e.preventDefault();
-    searchWrap.classList.add("active");
-  });
+//   searchOpen.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     searchWrap.classList.add("active");
+//   });
 
-  searchClose.addEventListener("click", (e) => {
-    e.preventDefault();
-    searchWrap.classList.remove("active");
-  });
+//   searchClose.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     searchWrap.classList.remove("active");
+//   });
 
   /**
    * Initiate glightbox
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+//   const glightbox = GLightbox({
+//     selector: '.glightbox'
+//   });
 
   /**
    * Animation on scroll function and init
    */
-  function aos_init() {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', () => {
-    aos_init();
-  });
+//   function aos_init() {
+//     AOS.init({
+//       duration: 1000,
+//       easing: 'ease-in-out',
+//       once: true,
+//       mirror: false
+//     });
+//   }
+//   window.addEventListener('load', () => {
+//     aos_init();
+//   });
 
 });
