@@ -23,7 +23,7 @@ const Login = () => {
         if (res.data.statusCode === 200) {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
           navigate('/');
-          document.getElementById("showInputData").textContent = `ID: ${id} | PW: ${password}`; // Show input data
+          // document.getElementById("showInputData").textContent = `ID: ${id} | PW: ${password}`; // Show input data
           alert('Welcome to InsightPress!');
         } else {
           sessionStorage.clear();

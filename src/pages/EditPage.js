@@ -2,26 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// EditPage 컴포넌트에서 userInfo 객체의 기본값을 설정
-const defaultUserInfo = {
-  id: '',
-  username: '',
-  email: '',
-  password: ''
-};
-
-const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
-  const [userId, setUserId] = useState(userInfo.id); // 로그인된 회원의 ID 상태
-  const [username, setUsername] = useState(userInfo.username);
-  const [email, setEmail] = useState(userInfo.email);
-  const [password, setPassword] = useState(userInfo.password);
+const EditPage = ({ onSave, onCancel }) => {
+  const [userInfo, setUserInfo] = useState(null);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
-    // 로그인된 회원의 ID를 가져오는 API 요청
-    const fetchUser = async () => {
+    const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/editpage`);
-        const userData = response.data; // 서버에서 반환하는 회원 정보
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/mypage`);
+        const userData = response.data;
+        setUserInfo(userData);
         setUsername(userData.username);
         setEmail(userData.email);
         setPassword(userData.password);
@@ -30,12 +22,13 @@ const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
       }
     };
 
-    fetchUser(); // 컴포넌트가 마운트될 때 회원 정보를 가져오도록 호출
-  }, [userId]);
+    fetchUserInfo();
+  }, []);
 
   const handleSave = async () => {
     try {
       const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
+        token: localStorage.getItem('token'), // JWT 토큰을 요청에 포함하여 서버로 전송
         username,
         email,
         password
@@ -47,10 +40,10 @@ const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
     }
   };
 
-  const navigate = useNavigate(); // useNavigate hook를 사용하여 navigate 함수 얻어오기
+  const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate('/MyPage'); // mypage로 이동
+    navigate('/MyPage');
   };
 
   return (
@@ -58,7 +51,7 @@ const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
       <h2>Edit My Page</h2>
       <div>
         <label>ID:</label>
-        <span>{userId}</span>
+        <span>{userInfo && userInfo.id}</span>
       </div>
       <div>
         <label>Username:</label>
