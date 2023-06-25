@@ -15,6 +15,7 @@ function Home() {
         axios
             .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
             .then((response) => {
+                console.log(response.data)
                 setArticles(response.data.body);
             })
             .catch((error) => {});
@@ -75,7 +76,7 @@ function Home() {
 
                     <div className="row">
                         <div className="col-md-12">
-                            {articles.map((article, index) => (
+                            {Array.isArray(articles) && articles.map((article, index) => (
                                 <div
                                     className="post-entry-1 border-bottom"
                                     key={index}
