@@ -22,16 +22,11 @@ function Home() {
     return (
         <>
             <section className="category-section">
-                <div
-                    className="container"
-                >
+                <div className="container">
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
-                        <h2>Business</h2>
+                        <h2>Headline</h2>
                         <div>
-                            <a
-                                href="#"
-                                className="more"
-                            >
+                            <a href="#" className="more">
                                 See All Business
                             </a>
                         </div>
@@ -63,9 +58,7 @@ function Home() {
                                         )}
                                     </div>
                                     <h2 className="mb-2">
-                                        <Link
-                                            to={`/article/${article.id}`}
-                                        >
+                                        <Link to={`/article/${article.id}`}>
                                             {article.title}
                                         </Link>
                                     </h2>

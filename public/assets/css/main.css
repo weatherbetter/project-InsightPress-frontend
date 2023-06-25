@@ -239,7 +239,7 @@ section {
     padding: 10px 0 10px 30px;
     font-family: var(--font-default);
     font-size: 16px;
-    font-weight: 500;
+    font-weight:500;
     color: rgba(var(--color-default-rgb), 1);
     white-space: nowrap;
     transition: 0.3s;
