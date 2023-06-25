@@ -11,33 +11,46 @@ const EditPage = ({ onSave, onCancel }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/mypage`);
-        const userData = response.data;
-        setUserInfo(userData);
-        setUsername(userData.username);
-        setEmail(userData.email);
-        setPassword(userData.password);
+        const token = sessionStorage.getItem('JWT_TOKEN');
+        if (token) {
+          const response = await axios.post(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`, {
+            token: token,
+          });
+          console.log(response);
+          if (response.data.statusCode === 200) {
+            setUserInfo(response.data.body);
+            setUsername(response.data.body.username);
+            setEmail(response.data.body.email);
+            setPassword(response.data.body.password);
+          }
+        } else {
+          setUserInfo(null);
+        }
       } catch (error) {
         console.error('Failed to fetch user data:', error);
+        setUserInfo(null);
       }
     };
 
     fetchUserInfo();
   }, []);
 
-  const handleSave = async () => {
-    try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
-        token: localStorage.getItem('token'), // JWT 토큰을 요청에 포함하여 서버로 전송
+  const handleSave = () => {
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
+        token: localStorage.getItem('token'),
         username,
         email,
-        password
+        password,
+      })
+      .then(response => {
+        console.log('User information updated successfully:', response.data);
+        onSave(); // Call the onSave callback to perform additional actions if needed
+        alert('User info updated');
+      })
+      .catch(error => {
+        console.error('User information update failed:', error);
       });
-      console.log('User information updated successfully:', response.data);
-      onSave(); // Call the onSave callback to perform additional actions if needed
-    } catch (error) {
-      console.error('User information update failed:', error);
-    }
   };
 
   const navigate = useNavigate();
@@ -55,15 +68,15 @@ const EditPage = ({ onSave, onCancel }) => {
       </div>
       <div>
         <label>Username:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
       </div>
       <div>
         <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </div>
       <button onClick={handleSave}>Save</button>
       <button onClick={handleCancel}>Cancel</button>
