@@ -10,6 +10,7 @@ import MyPage from "./pages/MyPage.js";
 import EditPage from "./pages/EditPage.js";
 import Withdraw from "./pages/Withdraw.js";
 import ArticleCategory from "./pages/ArticleCategory.js";
+import Error404 from "./pages/Error404.js";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/mypage/*" element={<MyPage />} />
                 <Route path="/EditPage" element={<EditPage />} />
                 <Route path="/Withdraw" element={<Withdraw />} />
+                <Route path="*" element={<Error404></Error404>} />
             </Routes>
         </div>
     );
