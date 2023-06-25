@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, Link, Navigate } from 'react-router-dom';
-import axios from 'axios';
-import EditPage from './EditPage.js';
-import Withdraw from './Withdraw.js';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Outlet, Link, Navigate } from "react-router-dom";
 
 function MyPage() {
   const [userInfo, setUserInfo] = useState(null);
@@ -16,42 +14,60 @@ function MyPage() {
   const handleWithdraw = () => {
     // Handle withdraw action
     // This can be a navigation or any other logic you want to perform
-    console.log('Withdraw action triggered');
+    console.log("Withdraw action triggered");
+  };
+
+  const mypage = () => {
+    const { id, username, email } = userInfo;
+
+    return (
+      <div>
+        <h2>My Page</h2>
+        <p>Id: {id}</p>
+        <p>Username: {username}</p>
+        <p>Email: {email}</p>
+        <button onClick={handleEdit}>
+          <Link to="/EditPage">Edit My Page</Link>
+        </button>
+        <button onClick={handleWithdraw}>
+          <Link to="/withdraw">Delete My Account</Link>
+        </button>
+        <Outlet />
+      </div>
+    );
   };
 
   useEffect(() => {
-    axios
-      .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`)
-      .then((response) => {
-        setUserInfo(response.data);
-      })
-      .catch((error) => {
-        setUserInfo(null);
-      });
+    const token = sessionStorage.getItem("JWT_TOKEN");
+    if (token) {
+      axios
+        .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`, {
+          token: token,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.statusCode === 200) {
+            setUserInfo(res.data.body);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user data:", error);
+          setUserInfo(null);
+        });
+    } else {
+      setUserInfo(null);
+    }
   }, []);
 
   if (!userInfo) {
     return <div>Please Login</div>;
   }
 
-  const { id, username, email, password } = userInfo; // Assuming the field names in the users table
-
   return (
-    <div>
-      <h2>My Page</h2>
-      <p>Id: {id}</p>
-      <p>username: {username}</p>
-      <p>email: {email}</p>
-      <p>password: {password}</p>
-      <button onClick={handleEdit}>
-        <Link to="/EditPage">Edit My Page</Link>
-      </button>
-      <button onClick={handleWithdraw}>
-        <Link to="/withdraw">Delete My Account</Link>
-      </button>
-
-      <Outlet />
-    </div>
+    <>
+      {mypage()}
+      
+    </>
   );
 }
 
