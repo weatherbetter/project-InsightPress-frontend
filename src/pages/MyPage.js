@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Outlet, Link, Navigate } from "react-router-dom";
 
 function MyPage() {
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState(null);
 
     const handleEdit = () => {
         // Navigate to the edit page
@@ -15,6 +15,26 @@ function MyPage() {
         // Handle withdraw action
         // This can be a navigation or any other logic you want to perform
         console.log("Withdraw action triggered");
+    };
+
+    const mypage = () => {
+        const { id, username, email } = userInfo;
+
+        return (
+            <div>
+                <h2>My Page</h2>
+                <p>Id: {id}</p>
+                <p>Username: {username}</p>
+                <p>Email: {email}</p>
+                <button onClick={handleEdit}>
+                    <Link to="/EditPage">Edit My Page</Link>
+                </button>
+                <button onClick={handleWithdraw}>
+                    <Link to="/withdraw">Delete My Account</Link>
+                </button>
+                <Outlet />
+            </div>
+        );
     };
 
     useEffect(() => {
@@ -42,26 +62,6 @@ function MyPage() {
     if (!userInfo) {
         return <div>Please Login</div>;
     }
-
-    const mypage = () => {
-        const { id, username, email } = userInfo;
-
-        return (
-            <div>
-                <h2>My Page</h2>
-                <p>Id: {id}</p>
-                <p>Username: {username}</p>
-                <p>Email: {email}</p>
-                <button onClick={handleEdit}>
-                    <Link to="/EditPage">Edit My Page</Link>
-                </button>
-                <button onClick={handleWithdraw}>
-                    <Link to="/withdraw">Delete My Account</Link>
-                </button>
-                <Outlet />
-            </div>
-        );
-    };
 
     return <>{mypage()}</>;
 }

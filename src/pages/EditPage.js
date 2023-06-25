@@ -39,9 +39,8 @@ const EditPage = ({ onSave, onCancel }) => {
     }, []);
 
     const handleSave = () => {
-        console.log(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage`);
         axios
-            .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage`, {
+            .put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
                 token: localStorage.getItem("token"),
                 username,
                 email,
