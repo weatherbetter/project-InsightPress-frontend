@@ -39,19 +39,26 @@ const EditPage = ({ onSave, onCancel }) => {
     }, []);
 
     const handleSave = () => {
+        console.log(sessionStorage.getItem("JWT_TOKEN"));
+        console.log({
+            token: sessionStorage.getItem("JWT_TOKEN"),
+            username: username,
+            email: email,
+            password: password,
+        });
         axios
-            .put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
-                token: localStorage.getItem("token"),
-                username,
-                email,
-                password,
+            .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage`, {
+                token: sessionStorage.getItem("JWT_TOKEN"),
+                username: username,
+                email: email,
+                password: password,
             })
             .then((response) => {
                 console.log(
                     "User information updated successfully:",
                     response.data
                 );
-                onSave(); // Call the onSave callback to perform additional actions if needed
+                // onSave(); // Call the onSave callback to perform additional actions if needed
                 alert("User info updated");
             })
             .catch((error) => {
