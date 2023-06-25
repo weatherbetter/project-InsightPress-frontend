@@ -21,11 +21,7 @@ function Article() {
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
             )
             .then((response) => {
-                setArticle(response.data.body);
-                console.log(
-                    `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
-                );
-                console.log(response.data);
+                setArticle(JSON.parse(response.data.body));
             })
             .catch((error) => {});
     }, []);

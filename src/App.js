@@ -8,25 +8,30 @@ import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
 import MyPage from "./pages/MyPage.js";
 import EditPage from "./pages/EditPage.js";
-import Withdraw from "./pages/Withdraw.js"
+import Withdraw from "./pages/Withdraw.js";
+import ArticleCategory from "./pages/ArticleCategory.js";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/article/:id" element={<Article />} />
-        <Route path="/newpost" element={<Newpost />} />
-        <Route path="/updatepost" element={<Newpost />} />
-        <Route path="/postqueue" element={<PostQueue />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/mypage/*" element={<MyPage />} />
-        <Route path="/EditPage" element={<EditPage />} />
-        <Route path="/Withdraw" element={<Withdraw />} />
-      </Routes>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="" element={<Home />} />
+                <Route
+                    path="/article"
+                    element={<ArticleCategory></ArticleCategory>}
+                />
+                <Route path="/article/:id" element={<Article />} />
+                <Route path="/newpost" element={<Newpost />} />
+                <Route path="/updatepost/:id" element={<Newpost />} />
+                <Route path="/postqueue" element={<PostQueue />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/mypage/*" element={<MyPage />} />
+                <Route path="/EditPage" element={<EditPage />} />
+                <Route path="/Withdraw" element={<Withdraw />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
