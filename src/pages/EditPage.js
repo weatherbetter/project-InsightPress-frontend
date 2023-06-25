@@ -20,7 +20,7 @@ const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
     // 로그인된 회원의 ID를 가져오는 API 요청
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/login/mypage/{int:id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/auth/editpage`);
         const userData = response.data; // 서버에서 반환하는 회원 정보
         setUsername(userData.username);
         setEmail(userData.email);
@@ -35,7 +35,7 @@ const EditPage = ({ userInfo = defaultUserInfo, onSave, onCancel }) => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/login/mypage/{int:id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/auth/editpage`, {
         username,
         email,
         password

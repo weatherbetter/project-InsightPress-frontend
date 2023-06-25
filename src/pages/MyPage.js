@@ -21,7 +21,7 @@ function MyPage() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BOARD_API_URL}/auth/login/mypage`)
+      .get(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`)
       .then((response) => {
         setUserInfo(response.data);
       })
