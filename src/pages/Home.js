@@ -13,13 +13,8 @@ function Home() {
         axios
             .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
             .then((response) => {
-<<<<<<< HEAD
-                console.log(response.data)
-                setArticles(response.data.body);
-=======
                 console.log(JSON.parse(response.data.body));
                 setArticles(JSON.parse(response.data.body));
->>>>>>> f8e5c988131e28b0e1b715fe5aeb785b65c49430
             })
             .catch((error) => {});
     }, []);
