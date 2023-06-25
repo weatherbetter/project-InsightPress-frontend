@@ -7,9 +7,12 @@ function ArticleCategory() {
     const pagination = 5; // 페이지 넘버링 수
     const pagination_before_after = 2; // 페이지 넘버링 앞 뒤 수
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPageCount, setTotalPageCount] = useState(3);
+    const [totalPageCount, setTotalPageCount] = useState(0);
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const article_category = useSelector((state) => {
+        return state.article_category;
+    });
     const [articles, setArticles] = useState(
         [
         {
@@ -38,9 +41,6 @@ function ArticleCategory() {
         },
     ]
     );
-    const article_category = useSelector((state) => {
-        return state.article_category;
-    });
 
     useEffect(() => {
         //     axios
@@ -69,7 +69,9 @@ function ArticleCategory() {
             <section className="category-section">
                 <div className="container">
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
-                        <h2>Politics</h2>
+                        <h2>
+                            {article_category[searchParams.get("category")]}
+                        </h2>
                     </div>
 
                     <div className="row">

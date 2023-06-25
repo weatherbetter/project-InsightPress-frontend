@@ -13,9 +13,9 @@ let updatePost = createSlice({
 const article_category = createSlice({
     name: "article_category",
     initialState: {
-        0: "정치",
-        1: "경제",
-    }
+        0: "Politics",
+        1: "Economy",
+    },
 });
 
 export let { setUpdatePost } = updatePost.actions;
