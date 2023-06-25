@@ -21,7 +21,9 @@ const WithdrawPage = ({ onWithdraw }) => {
   return (
     <div>
       <h2>Delete Your Account</h2>
-      <p>Sorry for you leaving. But you can come back anytime.</p>
+      <p>Sorry for you leaving.</p>
+      <p>But you can come back anytime.</p>
+
       <button onClick={onWithdraw}>DELETE MY ACCOUNT</button>
     </div>
   );
