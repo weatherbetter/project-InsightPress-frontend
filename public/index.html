@@ -53,51 +53,17 @@
     <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
     <title>InsightPress</title>
+    <!-- Kakao SDK for JavaScript 추가 -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.2.0/kakao.min.js"
+        integrity="sha384-x+WG2i7pOR+oWb6O5GV5f1KN2Ko6N7PTGPS7UlasYWNxZMKQA63Cj/B2lbUmUfuC"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body class="">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <!-- ======= Header ======= -->
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="/" class="logo d-flex align-items-center">
-                <h1>InsightPress</h1>
-            </a>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li class="dropdown"><a href="#"><span>Categories</span> <i
-                                class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                            <li><a href="/article?category=0">정치</a></li>
-                            <li><a href="/article?category=1">경제</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/postqueue">Post queue</a></li>
-                    <li><a href="/newpost">New Post</a></li>
-                    <li><a href="/signup">Signup</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/MyPage">MyPage</a></li>
 
-                </ul>
-            </nav><!-- .navbar -->
-            <div class="position-relative">
-                <i class="bi mobile-nav-toggle bi-list"></i>
-                <!-- ======= Search Form ======= -->
-                <div class="search-form-wrap js-search-form-wrap">
-                    <form action="search-result.html" class="search-form">
-                        <span class="icon bi-search"></span>
-                        <input type="text" placeholder="Search" class="form-control">
-                        <button class="btn js-search-close"><span class="bi-x"></span></button>
-                    </form>
-                </div><!-- End Search Form -->
-            </div>
-        </div>
-    </header>
-    <!-- End Header -->
-    <main id="main">
         <div id="root"></div>
-    </main>
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="footer-legal">
