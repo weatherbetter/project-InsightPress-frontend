@@ -14,8 +14,11 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault(); // Prevent form submission
     const data = {
-      userid: id,
-      password: password,
+      "httpMethod": "POST",
+      "body": {
+        userid: id,
+        password: password,
+      }
     };
 
     axios
@@ -23,12 +26,12 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         if (res.data.statusCode === 200) {
-          sessionStorage.setItem("JWT_TOKEN", res.data.body);
+          // sessionStorage.setItem("JWT_TOKEN", res.data.body);
           navigate('/');
           alert('Welcome to InsightPress!');
         } else {
           sessionStorage.clear();
-          alert('Oops, Your account does not exist or the password is incorrect.');
+          alert('Oops, Your account does not exist or Wrong Password.');
         }
       })
       .catch((err) => console.log(err));
