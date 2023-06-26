@@ -36,27 +36,52 @@ function PostQueue() {
     navigate(`/updatepost/${resQueue.id}`);
   };
 
+  // useEffect(() => {
+  //   const token = sessionStorage.getItem("JWT_TOKEN");
+  //   if (token) {
+  //     axios
+  //       .get(
+  //         `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,{
+  //            token:token, 
+  //       })
+  //       .then((response) => {
+  //          console.log(response);
+  //          if (response.data.statusCode === 200) {
+  //           requestQueues(res.data.body);
+  //          }
+  //       })
+  //         .catch((error) => {});
+  //         console.error("Please Login: ", error);
+  //     } else {
+  //     navigate("/login"); // Redirect to login page if token is missing
+  //   }
+  // }, []);
+
   useEffect(() => {
     const token = sessionStorage.getItem("JWT_TOKEN");
     if (token) {
-      axios
-        .get(
-          `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((response) => {
-          setRequestQueues(JSON.parse(response.data.body));
-          console.log(JSON.parse(response.data.body));
-        })
-        .catch((error) => {});
+        axios
+            .post(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`, {
+                token: token,
+            })
+            .then((res) => {
+                console.log(res);
+                if (res && res.status === 200) {
+                  requestQueues.findIndex((item) => item.id === requestQueues.id)
+                }
+            })
+            .catch((error) => {
+                console.error("Failed to fetch post queue data:", error);
+                setRequestQueues(null);
+            });
     } else {
-      navigate("/login"); // Redirect to login page if token is missing
+        setRequestQueues(null);
     }
-  }, []);
+}, []);
+
+if (!requestQueues) {
+    return <div>Please Login</div>;
+}
 
   return (
     <>
