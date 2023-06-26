@@ -62,26 +62,27 @@ function WordBubble(props) {
                 `<span style=" background: linear-gradient(to top, #FFE400 50%, transparent 50%)">${e.target.dataItem.dataContext.name}</span>`
             );
             props.setArticle({ ...props.article });
+            console.log(e.target.dataItem.dataContext.name);
 
-                // console.log(
-                //     `https://openapi.naver.com/v1/search/news.json?query=`
-                // );
-                // axios
-                //     .get("/v1/search/news.json", {
-                //         params: {
-                //             query: `${e.target.dataItem.dataContext.name}`,
-                //         },
-                //         headers: {
-                //             "X-Naver-Client-Id": "h4fmO6pmaYv_CYUs7H9f",
-                //             "X-Naver-Client-Secret": "ctO_ocNN9Z",
-                //         },
-                //     })
-                //     .then((response) => {
-                //         console.log(response);
-                //         console.log(JSON.parse(response.data));
-                //         props.setKeywordNews(JSON.parse(response.data));
-                //     })
-                //     .catch((error) => {});
+            // console.log(
+            //     `https://openapi.naver.com/v1/search/news.json?query=`
+            // );
+            // axios
+            //     .get("/v1/search/news.json", {
+            //         params: {
+            //             query: `${e.target.dataItem.dataContext.name}`,
+            //         },
+            //         headers: {
+            //             "X-Naver-Client-Id": "h4fmO6pmaYv_CYUs7H9f",
+            //             "X-Naver-Client-Secret": "ctO_ocNN9Z",
+            //         },
+            //     })
+            //     .then((response) => {
+            //         console.log(response);
+            //         console.log(JSON.parse(response.data));
+            //         props.setKeywordNews(JSON.parse(response.data));
+            //     })
+            //     .catch((error) => {});
         });
 
         series.data.setAll([data]);
@@ -90,7 +91,7 @@ function WordBubble(props) {
         // Make stuff animate on load
         series.appear(1000, 100);
         return () => wordBubbleRoot.dispose();
-    }, []);
+    }, [props]);
 
     return (
         <>

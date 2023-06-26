@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import WordBubble from "./WordBubble.js";
 import LineChart from "./LineChart.js";
+import { create, PieSeries } from "@amcharts/amcharts5";
 
 function Article() {
     const [article, setArticle] = useState({
@@ -27,21 +28,6 @@ function Article() {
     const [original_article, setOriginal_article] = useState({
         ...article,
     });
-    const wordData = {
-        value: 0,
-        children: [
-            { name: "가격", value: 16 },
-            { name: "라면", value: 15 },
-            { name: "이익", value: 15 },
-            { name: "영업", value: 11 },
-            { name: "정부", value: 8 },
-            { name: "시장", value: 7 },
-            { name: "해외", value: 6 },
-            { name: "회사", value: 6 },
-            { name: "대비", value: 6 },
-            { name: "미국", value: 6 },
-        ],
-    };
 
     const [keywordNews, setKeywordNews] = useState([
         {
@@ -135,16 +121,39 @@ function Article() {
         },
     ]);
 
-    // useEffect(() => {
-    //     axios
-    //         .get(
-    //             `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
-    //         )
-    //         .then((response) => {
-    //             setArticle(JSON.parse(response.data.body));
-    //         })
-    //         .catch((error) => {});
-    // }, []);
+    const [wordData, setWord] = useState({
+        value: 0,
+        children: [
+            { name: "새우", value: 20 },
+            { name: "고등어", value: 20 },
+            { name: "참치", value: 20 },
+        ],
+    });
+
+    useEffect(() => {
+        // axios
+        //     .get(
+        //         `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
+        //     )
+        //     .then((response) => {
+        //         setArticle(JSON.parse(response.data.body));
+        //     })
+        //     .catch((error) => {});
+        // axios
+        //     .post(`${process.env.REACT_APP_BOARD_API_URL}/analysis`, {
+        //         body: {
+        //             article: article.content,
+        //             show_count: 10,
+        //         },
+        //     })
+        //     .then((response) => {
+        //         console.log(response.data.body);
+        //         setWord({
+        //     children: response.data.body
+        // })
+        //     })
+        //     .catch((error) => {});
+    }, []);
 
     return (
         <>
@@ -176,16 +185,16 @@ function Article() {
                                 <div
                                     className="alert alert-primary"
                                     role="alert"
-                                >
-                                    {article.gpt_content}
-                                </div>
+                                    dangerouslySetInnerHTML={{
+                                        __html: article.gpt_content,
+                                    }}
+                                ></div>
                                 {/* Start news content*/}
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html: article.content_html,
                                     }}
                                 ></div>
-                                {/* {article.content} */}
                                 {/* End news content*/}
                             </div>
                             {/* <!-- End Single Post Content --> */}

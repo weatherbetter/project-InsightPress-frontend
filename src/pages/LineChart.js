@@ -183,7 +183,6 @@ let data = [
         color: root.interfaceColors.get("negative"),
     },
 ];
-console.log(data);
 series.data.setAll(data);
 sbSeries.data.setAll(data);
 
