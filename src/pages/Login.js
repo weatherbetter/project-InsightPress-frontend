@@ -2,11 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
-<<<<<<< HEAD
 import NaverLogin from "./NaverLogin";
-=======
 import KakaoLogin from "./KakaoLogin";
->>>>>>> 71515af5c6c0cd6c00a4b4a1441e006cee9ea38c
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -74,7 +71,6 @@ const Login = () => {
   };
   
   return (
-<<<<<<< HEAD
     <>
       <div
         style={{
@@ -99,8 +95,6 @@ const Login = () => {
       <div style={{ textAlign: 'center', padding: '30px' }}>
         <NaverLogin />
       </div>
-    </>
-=======
       <div
           style={{
               display: "flex",
@@ -126,10 +120,10 @@ const Login = () => {
           </div>
           <div id="showInputData"></div>
           <div style={{ textAlign: "center", padding: "30px" }}>
-              <KakaoLogin /> {/* 카카로 로그인 컴포넌트 추가 */}
+              <KakaoLogin />
           </div>
       </div>
->>>>>>> 71515af5c6c0cd6c00a4b4a1441e006cee9ea38c
+    </>
   );
 };
 
