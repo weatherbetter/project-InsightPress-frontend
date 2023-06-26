@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
+import NaverLogin from "./NaverLogin";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -26,7 +27,7 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         if (res.data.statusCode === 200) {
-          // sessionStorage.setItem("JWT_TOKEN", res.data.body);
+          sessionStorage.setItem("JWT_TOKEN", res.data.body);
           navigate('/');
           alert('Welcome to InsightPress!');
         } else {
@@ -36,22 +37,6 @@ const Login = () => {
       })
       .catch((err) => console.log(err));
   };
-
-  // const handleLogout = () => {
-  //   axios
-  //     .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/logout`)
-  //     .then((res) => {
-  //       console.log(res);
-  //       if (res.data.statusCode === 200) {
-  //         sessionStorage.removeItem("JWT_TOKEN"); // 토큰 삭제
-  //         navigate('/login'); // 로그인 페이지로 이동
-  //         alert('Logged out successfully.');
-  //       } else {
-  //         alert('Failed to log out.');
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -85,56 +70,32 @@ const Login = () => {
   };
   
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <div>
-        ID: <input type="text" value={id} onChange={handleChangeId} />
-        <br />
-        PW:{" "}
-        <input type="password" value={password} onChange={handleChangePassword} onKeyPress={handleKeyPress} />
-        <br />
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleLogout}>Logout</button>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          ID: <input type="text" value={id} onChange={handleChangeId} />
+          <br />
+          PW:{" "}
+          <input type="password" value={password} onChange={handleChangePassword} onKeyPress={handleKeyPress} />
+          <br />
+          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+        <div id="showInputData"></div>
       </div>
-      <div id="showInputData"></div>
-    </div>
+      <div style={{ textAlign: 'center', padding: '30px' }}>
+        <NaverLogin />
+      </div>
+    </>
   );
 };
-
-const TokenExpirationCheck = () => {
-  const [isTokenExpired, setIsTokenExpired] = useState(false);
-
-  useEffect(() => {
-    const checkTokenExpiration = () => {
-      const token = sessionStorage.getItem('JWT_TOKEN');
-      if (token) {
-        const decodedToken = jwt_decode(token);
-        const currentTime = Math.floor(Date.now() / 1000);
-        if (decodedToken.exp < currentTime) {
-          setIsTokenExpired(true);
-          sessionStorage.removeItem('JWT_TOKEN');
-          // 추가적인 로그아웃 처리 또는 리다이렉션을 수행할 수 있습니다.
-        }
-      }
-    };
-
-    const intervalId = setInterval(checkTokenExpiration, 60000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-
-  return <div>{isTokenExpired ? 'Token has expired' : 'Token is valid'}</div>;
-};
-
-// export { Login, TokenExpirationCheck };
 
 export default Login;
