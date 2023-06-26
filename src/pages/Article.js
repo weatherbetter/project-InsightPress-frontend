@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import WordBubble from "./WordBubble.js";
-import LineChart from "./LineChart.js";
-import { create, PieSeries } from "@amcharts/amcharts5";
+// import LineChart from "./LineChart.js";
 
 function Article() {
     const [article, setArticle] = useState({
@@ -214,7 +213,7 @@ function Article() {
                             keywordNews={keywordNews}
                             setKeywordNews={setKeywordNews}
                         ></WordBubble>
-                        <LineChart></LineChart>
+                        {/* <LineChart></LineChart> */}
                     </div>
                     <div className="col-lg-6">
                         <h3 className="footer-heading">Recent Posts</h3>
