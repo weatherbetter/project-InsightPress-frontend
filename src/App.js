@@ -13,6 +13,7 @@ import ArticleCategory from "./pages/ArticleCategory.js";
 import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
+import NaverLogin from "./pages/NaverLogin.js"
 
 function App() {
     // 로그인 여부
@@ -119,6 +120,10 @@ function App() {
                         <Route
                             path="/kakaoLogin"
                             element={<KakaoLogin exact={true} />}
+                        />
+                        <Route 
+                            path="/NaverLogin"
+                            element={<NaverLogin exact={true} />}
                         />
                         <Route path="/EditPage" element={<EditPage />} />
                         <Route path="/Withdraw" element={<Withdraw />} />
