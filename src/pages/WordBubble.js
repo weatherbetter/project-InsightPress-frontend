@@ -1,11 +1,10 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import * as am5 from "@amcharts/amcharts5";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import * as am5hierarchy from "@amcharts/amcharts5/hierarchy";
 import axios from "axios";
 
 function WordBubble(props) {
-
     useEffect(() => {
         let wordBubbleRoot = am5.Root.new("chartdiv");
 
@@ -55,34 +54,25 @@ function WordBubble(props) {
 
         // handle clicking on nodes and link/unlink them
         series.nodes.template.events.on("click", function (e) {
-            props.article.content_html = props.original_article.content_html;
+            props.article.content = props.original_article.content;
             const pattern = new RegExp(e.target.dataItem.dataContext.name, "g");
-            props.article.content_html = props.article.content_html.replace(
+            props.article.content = props.article.content.replace(
                 pattern,
                 `<span style=" background: linear-gradient(to top, #FFE400 50%, transparent 50%)">${e.target.dataItem.dataContext.name}</span>`
             );
             props.setArticle({ ...props.article });
-            console.log(e.target.dataItem.dataContext.name);
-
-            // console.log(
-            //     `https://openapi.naver.com/v1/search/news.json?query=`
-            // );
-            // axios
-            //     .get("/v1/search/news.json", {
-            //         params: {
-            //             query: `${e.target.dataItem.dataContext.name}`,
-            //         },
-            //         headers: {
-            //             "X-Naver-Client-Id": "h4fmO6pmaYv_CYUs7H9f",
-            //             "X-Naver-Client-Secret": "ctO_ocNN9Z",
-            //         },
-            //     })
-            //     .then((response) => {
-            //         console.log(response);
-            //         console.log(JSON.parse(response.data));
-            //         props.setKeywordNews(JSON.parse(response.data));
-            //     })
-            //     .catch((error) => {});
+            axios
+                .get(`${process.env.REACT_APP_BOARD_API_URL}/analysis`, {
+                    params: {
+                        key: `${e.target.dataItem.dataContext.name}`,
+                    },
+                })
+                .then((response) => {
+                    props.setKeywordNews(
+                        JSON.parse(JSON.parse(response.data.body)).items
+                    );
+                })
+                .catch((error) => {});
         });
 
         series.data.setAll([data]);
