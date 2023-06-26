@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
+import KakaoLogin from "./KakaoLogin";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -82,26 +83,34 @@ const Login = () => {
   };
   
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <div>
-        ID: <input type="text" value={id} onChange={handleChangeId} />
-        <br />
-        PW:{" "}
-        <input type="password" value={password} onChange={handleChangePassword} onKeyPress={handleKeyPress} />
-        <br />
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleLogout}>Logout</button>
+      <div
+          style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100vh",
+          }}
+      >
+          <div>
+              ID: <input type="text" value={id} onChange={handleChangeId} />
+              <br />
+              PW:{" "}
+              <input
+                  type="password"
+                  value={password}
+                  onChange={handleChangePassword}
+                  onKeyPress={handleKeyPress}
+              />
+              <br />
+              <button onClick={handleLogin}>Login</button>
+              <button onClick={handleLogout}>Logout</button>
+          </div>
+          <div id="showInputData"></div>
+          <div style={{ textAlign: "center", padding: "30px" }}>
+              <KakaoLogin /> {/* 카카로 로그인 컴포넌트 추가 */}
+          </div>
       </div>
-      <div id="showInputData"></div>
-    </div>
   );
 };
 
