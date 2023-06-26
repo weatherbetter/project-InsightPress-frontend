@@ -18,11 +18,33 @@ const article_category = createSlice({
     },
 });
 
+const article_highlight = createSlice({
+    name: "article_highlight",
+    initialState: "",
+    reducers: {
+        setArticle_highlight(state, action) {
+            return action.payload;
+        },
+    },
+});
+
+const article = createSlice({
+    name: "article",
+    initialState: "",
+    reducers: {
+        setArticle(state, action) {
+            return action.payload;
+        },
+    },
+});
+
 export let { setUpdatePost } = updatePost.actions;
+export let { setArticle_highlight } = article_highlight.actions;
 
 export default configureStore({
     reducer: {
         updatePost: updatePost.reducer,
         article_category: article_category.reducer,
+        article_highlight: article_highlight.reducer
     },
 });
