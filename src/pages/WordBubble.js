@@ -54,6 +54,7 @@ function WordBubble(props) {
 
         // handle clicking on nodes and link/unlink them
         series.nodes.template.events.on("click", function (e) {
+            props.setNaverApiloading(true);
             props.article.content = props.original_article.content;
             const pattern = new RegExp(e.target.dataItem.dataContext.name, "g");
             props.article.content = props.article.content.replace(
@@ -71,6 +72,7 @@ function WordBubble(props) {
                     props.setKeywordNews(
                         JSON.parse(JSON.parse(response.data.body)).items
                     );
+                    props.setNaverApiloading(false);
                 })
                 .catch((error) => {});
         });

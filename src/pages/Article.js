@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import WordBubble from "./WordBubble.js";
+import Loading from "../components/Loading.js";
 
 function Article() {
     const [article, setArticle] = useState({});
@@ -18,6 +19,8 @@ function Article() {
         value: 0,
         children: [],
     });
+    const [wordloading, setWordLoading] = useState(false);
+    const [naverApiloading, setNaverApiloading] = useState(false);
 
     useEffect(() => {
         axios
@@ -25,6 +28,7 @@ function Article() {
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/${article_id}`
             )
             .then((response) => {
+                setWordLoading(true);
                 setArticle(JSON.parse(response.data.body));
                 setOriginal_article(JSON.parse(response.data.body));
                 axios
@@ -38,6 +42,7 @@ function Article() {
                         setWord({
                             children: response.data.body,
                         });
+                        setWordLoading(false);
                     })
                     .catch((error) => {});
             })
@@ -95,46 +100,48 @@ function Article() {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-6">
-                        <WordBubble
-                            wordData={wordData}
-                            setArticle={setArticle}
-                            article={article}
-                            original_article={original_article}
-                            keywordNews={keywordNews}
-                            setKeywordNews={setKeywordNews}
-                        ></WordBubble>
+                        {wordloading ? (
+                            <Loading />
+                        ) : (
+                            <WordBubble
+                                wordData={wordData}
+                                setArticle={setArticle}
+                                article={article}
+                                original_article={original_article}
+                                keywordNews={keywordNews}
+                                setKeywordNews={setKeywordNews}
+                                setNaverApiloading={setNaverApiloading}
+                            ></WordBubble>
+                        )}
                     </div>
                     <div className="col-lg-6">
                         <h3 className="footer-heading">Recent Posts</h3>
-
-                        <ul className="footer-links footer-blog-entry list-unstyled">
-                            {keywordNews.map((keyNews, index) => {
-                                return (
-                                    <li key={index}>
-                                        <a
-                                            href={keyNews.link}
-                                            className="d-flex align-items-center"
-                                            target="_blank"
-                                        >
-                                            <div>
-                                                <div className="post-meta d-block">
-                                                    <span className="date">
-                                                        Culture
-                                                    </span>{" "}
-                                                    <span className="mx-1">
-                                                        •
-                                                    </span>{" "}
-                                                    <span>
-                                                        {keyNews.pubDate}
-                                                    </span>
+                        {naverApiloading ? (
+                            <Loading />
+                        ) : (
+                            <ul className="footer-links footer-blog-entry list-unstyled">
+                                {keywordNews.map((keyNews, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <a
+                                                href={keyNews.link}
+                                                className="d-flex align-items-center"
+                                                target="_blank"
+                                            >
+                                                <div>
+                                                    <div className="post-meta d-block">
+                                                        <span>
+                                                            {keyNews.pubDate}
+                                                        </span>
+                                                    </div>
+                                                    <span>{keyNews.title}</span>
                                                 </div>
-                                                <span>{keyNews.title}</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        )}
                     </div>
                 </div>
             </div>
