@@ -111,44 +111,4 @@ document.addEventListener('DOMContentLoaded', () => {
       prevEl: ".custom-swiper-button-prev",
     },
   });
-
-  /**
-   * Open and close the search form.
-   */
-//   const searchOpen = document.querySelector('.js-search-open');
-//   const searchClose = document.querySelector('.js-search-close');
-//   const searchWrap = document.querySelector(".js-search-form-wrap");
-
-//   searchOpen.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     searchWrap.classList.add("active");
-//   });
-
-//   searchClose.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     searchWrap.classList.remove("active");
-//   });
-
-  /**
-   * Initiate glightbox
-   */
-//   const glightbox = GLightbox({
-//     selector: '.glightbox'
-//   });
-
-  /**
-   * Animation on scroll function and init
-   */
-//   function aos_init() {
-//     AOS.init({
-//       duration: 1000,
-//       easing: 'ease-in-out',
-//       once: true,
-//       mirror: false
-//     });
-//   }
-//   window.addEventListener('load', () => {
-//     aos_init();
-//   });
-
 });
