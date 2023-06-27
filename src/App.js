@@ -13,7 +13,7 @@ import ArticleCategory from "./pages/ArticleCategory.js";
 import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
-/* import NaverLogin from "./pages/NaverLogin.js"; */
+import NaverLogin from "./pages/NaverLogin.js";
 
 function App() {
     // 로그인 여부
@@ -28,12 +28,12 @@ function App() {
         }
     });
 
-    // useEffect(() => {
-    //     const isLogin = !!window.localStorage.getItem('userName');
-    //     if (isLogin) {
-    //         window.location.href = '/home';
-    //     }
-    // }, []);
+    useEffect(() => {
+        const isLogin = !!window.localStorage.getItem('userName');
+        if (isLogin) {
+            window.location.href = '/home';
+        }
+    }, []);
 
     const handlerLogout = e => {
         e.preventDefault();
@@ -43,9 +43,6 @@ function App() {
 
     return (
         <>
-            {/* <div style={{textAign: 'center', padding: '30px'}}>
-                <NaverLogin/>
-            </div> */}
             {/* <!-- ======= Header ======= --> */}
             <header
                 id="header"
@@ -145,6 +142,12 @@ function App() {
                     </Routes>
                 </div>
             </main>
+
+
+            <div style={{textAlign: 'center', padding: '30px'}}>
+                <NaverLogin />
+            </div> 
+
         </>
     );
 }
