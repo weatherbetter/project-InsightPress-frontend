@@ -73,38 +73,111 @@ const Withdraw = ({ onWithdraw, onCancel }) => {
     };
 
     return (
-        <div>
-            <h2>Delete My Page</h2>
-            <div>
-                <label>ID:</label>
-                <span>{userInfo && userInfo.id}</span>
+        <div className="container">
+            <div className="section-header d-flex justify-content-between align-items-center">
+                <h2>Delete Profile</h2>
             </div>
-            <div>
-                <label>Username:</label>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <button onClick={handleWithdraw}>Delete</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <section className="section profile">
+                <div className="row">
+                    <div className="col-xl-3">
+                        <div className="card">
+                            <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                                <i
+                                    className="bi bi-person-circle"
+                                    style={{
+                                        fontSize: "72px",
+                                    }}
+                                ></i>
+                                <h2>{userInfo && userInfo.id}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-xl-9">
+                        <div className="">
+                            <div>
+                                <h5 className="card-title">Delete Profile</h5>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="renewPassword"
+                                        className="col-md-4 col-lg-3 col-form-label"
+                                    >
+                                        Username
+                                    </label>
+                                    <div className="col-md-3 col-lg-3">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            value={username}
+                                            onChange={(e) =>
+                                                setUsername(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="renewPassword"
+                                        className="col-md-4 col-lg-3 col-form-label"
+                                    >
+                                        Email
+                                    </label>
+                                    <div className="col-md-3 col-lg-3">
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <label
+                                        htmlFor="renewPassword"
+                                        className="col-md-4 col-lg-3 col-form-label"
+                                    >
+                                        Password
+                                    </label>
+                                    <div className="col-md-3 col-lg-3">
+                                        <input
+                                            type="password"
+                                            className="form-control"
+                                            value={password}
+                                            onChange={(e) =>
+                                                setPassword(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-secondary"
+                                            onClick={() => {
+                                                handleWithdraw();
+                                            }}
+                                        >
+                                            Delete
+                                        </button>{" "}
+                                        <button
+                                            type="submit"
+                                            className="btn btn-danger"
+                                            onClick={() => {
+                                                handleCancel();
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

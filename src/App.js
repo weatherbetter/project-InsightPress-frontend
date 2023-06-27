@@ -18,6 +18,7 @@ import { setIsLogin, setUpdatePost, setUserId } from "./store.js";
 import NaverLogin from "./pages/NaverLogin.js";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
+import Custom from "./pages/Custom.js";
 
 function App() {
     let navigate = useNavigate();
@@ -79,6 +80,7 @@ function App() {
                         />
                         <Route path="/EditPage" element={<EditPage />} />
                         <Route path="/Withdraw" element={<Withdraw />} />
+                        <Route path="/Custom" element={<Custom />} />
                         <Route path="*" element={<Error404></Error404>} />
                     </Routes>
                 </div>

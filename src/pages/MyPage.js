@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Outlet, Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState(null);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const token = sessionStorage.getItem("JWT_TOKEN");
         if (token) {
@@ -27,12 +28,6 @@ function MyPage() {
         }
     }, []);
 
-    const handleEdit = () => {
-        // Navigate to the edit page
-        // Use the 'Navigate' component from react-router-dom
-        return <Navigate to="/EditPage" />;
-    };
-
     const handleWithdraw = () => {
         // Handle withdraw action
         // This can be a navigation or any other logic you want to perform
@@ -43,18 +38,79 @@ function MyPage() {
         const { id, username, email } = userInfo;
 
         return (
-            <div>
-                <h2>My Page</h2>
-                <p>Id: {id}</p>
-                <p>Username: {username}</p>
-                <p>Email: {email}</p>
-                <button onClick={handleEdit}>
-                    <Link to="/EditPage">Edit My Page</Link>
-                </button>
-                <button onClick={handleWithdraw}>
-                    <Link to="/withdraw">Delete My Account</Link>
-                </button>
-                <Outlet />
+            <div className="container">
+                <div className="section-header d-flex justify-content-between align-items-center">
+                    <h2>USER INFO</h2>
+                </div>
+                <section className="section profile">
+                    <div className="row">
+                        <div className="col-xl-3">
+                            <div className="card">
+                                <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                                    <i
+                                        className="bi bi-person-circle"
+                                        style={{
+                                            fontSize: "72px",
+                                        }}
+                                    ></i>
+                                    <h2>{id}</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-xl-9">
+                            <div className="">
+                                <div>
+                                    <h5 className="card-title">
+                                        Profile Details
+                                    </h5>
+
+                                    <div className="row">
+                                        <div className="col-lg-3 col-md-4 label ">
+                                            Username
+                                        </div>
+                                        <div className="col-lg-9 col-md-8">
+                                            {username}
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col-lg-3 col-md-4 label">
+                                            Email
+                                        </div>
+                                        <div className="col-lg-9 col-md-8">
+                                            {email}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="">
+                                            <button
+                                                type="submit"
+                                                className="btn btn-secondary"
+                                                onClick={() =>
+                                                    navigate("/EditPage")
+                                                }
+                                            >
+                                                Edit My Account
+                                            </button>{" "}
+                                            <button
+                                                type="submit"
+                                                className="btn btn-danger"
+                                                onClick={() => {
+                                                    // handleWithdraw()
+                                                    navigate("/withdraw");
+                                                }}
+                                            >
+                                                Delete My Account
+                                            </button>
+                                            <Outlet />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         );
     };
