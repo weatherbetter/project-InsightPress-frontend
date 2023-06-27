@@ -39,7 +39,6 @@ const article = createSlice({
 });
 
 // 로그인 여부
-// const [isLogin, setIsLogin] = useState(false);
 const isLogin = createSlice({
     name: "isLogin",
     initialState: false,

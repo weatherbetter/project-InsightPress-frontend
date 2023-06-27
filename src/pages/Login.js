@@ -30,6 +30,8 @@ const Login = () => {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
           window.location.href = "/";
           alert('Welcome to InsightPress!');
+          // redux 로 유저 id 저장!
+          
         } else {
           sessionStorage.clear();
           alert('Oops, Your account does not exist or the password is incorrect.');
