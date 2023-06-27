@@ -1,8 +1,8 @@
-import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home.js";
 import Article from "./pages/Article.js";
 import Newpost from "./pages/Newpost.js";
+import "./App.css";
 import PostQueue from "./pages/PostQueue.js";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
@@ -13,22 +13,39 @@ import ArticleCategory from "./pages/ArticleCategory.js";
 import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
-import NaverLogin from "./pages/NaverLogin.js"
+/* import NaverLogin from "./pages/NaverLogin.js"; */
 
 function App() {
     // 로그인 여부
     const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
-        if (localStorage.getItem("JWT_TOKEN")) {
+        console.log(sessionStorage.getItem("JWT_TOKEN"))
+        if (sessionStorage.getItem("JWT_TOKEN")) {
             setIsLogin(true);
         } else {
             setIsLogin(false);
         }
     });
 
+    // useEffect(() => {
+    //     const isLogin = !!window.localStorage.getItem('userName');
+    //     if (isLogin) {
+    //         window.location.href = '/home';
+    //     }
+    // }, []);
+
+    const handlerLogout = e => {
+        e.preventDefault();
+        sessionStorage.clear();        
+        window.location.href = "/login";
+    };
+
     return (
         <>
+            {/* <div style={{textAign: 'center', padding: '30px'}}>
+                <NaverLogin/>
+            </div> */}
             {/* <!-- ======= Header ======= --> */}
             <header
                 id="header"
@@ -67,10 +84,7 @@ function App() {
                                 <a href="/signup">Signup</a>
                             </li>
                             <li>
-                                <a href="/login">
-                                    {" "}
-                                    {isLogin ? "Login" : "Logout"}
-                                </a>
+                                {isLogin ? <a href="#" onClick={handlerLogout}>Logout</a> : <a href="/login" target="_self">Login</a>}
                             </li>
                             <li>
                                 <a href="/MyPage">MyPage</a>
@@ -121,10 +135,10 @@ function App() {
                             path="/kakaoLogin"
                             element={<KakaoLogin exact={true} />}
                         />
-                        <Route 
+                        {/* <Route 
                             path="/NaverLogin"
                             element={<NaverLogin exact={true} />}
-                        />
+                        /> */}
                         <Route path="/EditPage" element={<EditPage />} />
                         <Route path="/Withdraw" element={<Withdraw />} />
                         <Route path="*" element={<Error404></Error404>} />
