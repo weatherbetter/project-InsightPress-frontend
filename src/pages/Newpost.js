@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
 function Newpost() {
     let navigate = useNavigate();
     const token = sessionStorage.getItem("JWT_TOKEN");
-    if (!token) {
-        navigate("/login");
-    }
+        useEffect(() => {
+            if (!token) {
+                navigate("/login");
+            }
+        }, []);
     let updatePost = useSelector((state) => {
         return state.updatePost;
     });
