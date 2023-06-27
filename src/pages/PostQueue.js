@@ -32,7 +32,6 @@ function PostQueue() {
 
     const handlerUpdate = (resQueue) => {
         dispatch(setUpdatePost(resQueue));
-        console.log(resQueue);
         navigate(`/updatepost/${resQueue.id}`);
     };
 
@@ -49,7 +48,6 @@ function PostQueue() {
                     `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`
                 )
                 .then((response) => {
-                    console.log(response);
                     if (response.data.statusCode === 200) {
                         setRequestQueues(JSON.parse(response.data.body));
                     }

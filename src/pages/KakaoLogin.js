@@ -56,12 +56,8 @@ const KakaoLogin = () => {
                         url: "/v2/user/me",
                     })
                         .then((response) => {
-                            // 사용자 정보 로깅
-                            console.log(response);
-
                             // 애플리케이션에서 필요한 정보를 추출해서 로컬 스토리지에 저장
                             const { kakao_account } = response;
-                            console.log(kakao_account);
                             // 필드명 수정 필요
                             sessionStorage.setItem(
                                 "JWT_TOKEN",
@@ -76,10 +72,9 @@ const KakaoLogin = () => {
                             navigate("/");
                         })
                         .catch((error) => {
-                            console.log(error);
                         });
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {});
         }
     }, []);
 

@@ -50,7 +50,6 @@ function App() {
             dispatch(setUserId(""));
         }
     });
-    console.log(user_id);
 
     return (
         <>

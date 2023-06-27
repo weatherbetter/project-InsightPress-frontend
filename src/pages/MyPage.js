@@ -14,7 +14,6 @@ function MyPage() {
                     token: token,
                 })
                 .then((res) => {
-                    console.log(res);
                     if (res.data.statusCode === 200) {
                         setUserInfo(res.data.body);
                     }
@@ -31,7 +30,6 @@ function MyPage() {
     const handleWithdraw = () => {
         // Handle withdraw action
         // This can be a navigation or any other logic you want to perform
-        console.log("Withdraw action triggered");
     };
 
     const mypage = () => {

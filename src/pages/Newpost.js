@@ -17,7 +17,6 @@ function Newpost() {
     let user_id = useSelector((state) => {
         return state.user_id;
     });
-    console.log(user_id);
 
     function addPost(event) {
         event.preventDefault();

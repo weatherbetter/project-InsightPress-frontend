@@ -19,7 +19,6 @@ const Withdraw = ({ onWithdraw, onCancel }) => {
                             token: token,
                         }
                     );
-                    console.log(response);
                     if (response.data.statusCode === 200) {
                         setUserInfo(response.data.body);
                         setUsername(response.data.body.username);
@@ -39,13 +38,6 @@ const Withdraw = ({ onWithdraw, onCancel }) => {
     }, []);
 
     const handleWithdraw = () => {
-        console.log(sessionStorage.getItem("JWT_TOKEN"));
-        console.log({
-            token: sessionStorage.getItem("JWT_TOKEN"),
-            username: username,
-            email: email,
-            password: password,
-        });
         axios
             .delete(`${process.env.REACT_APP_BOARD_API_URL}/auth/withdraw`, {
                 token: sessionStorage.getItem("JWT_TOKEN"),
@@ -54,10 +46,6 @@ const Withdraw = ({ onWithdraw, onCancel }) => {
                 password: password,
             })
             .then((response) => {
-                console.log(
-                    "User information deleted successfully:",
-                    response.data
-                );
                 // onSave(); // Call the onSave callback to perform additional actions if needed
                 alert("User info deleted. Hope To See You Again!");
             })

@@ -14,11 +14,6 @@ const Signup = () => {
     const handlePasswordChange = (e) => setPassword(e.target.value);
 
     const handleSignup = () => {
-        console.log("ID:", id);
-        console.log("Username:", username);
-        console.log("Email:", email);
-        console.log("Password:", password);
-
         //   const data = {
         //     id,
         //     username,
@@ -34,11 +29,10 @@ const Signup = () => {
                 password: password,
             })
             .then((res) => {
-                console.log("suc");
                 // setSignupSuccess(true); // Set the signup success state
                 // showInputData(); // Call the function to display input data
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {});
     };
 
     // const showInputData = () => {
@@ -65,7 +59,7 @@ const Signup = () => {
             <div className="container aos-init aos-animate" data-aos="fade-up">
                 <div className="row">
                     <div className="col-lg-12 text-center mb-5">
-                        <h3 className="page-title">Signup</h3>
+                        <h3 className="page-title">Sign up</h3>
                     </div>
                 </div>
                 <div className="form col-sm-6 mx-auto">

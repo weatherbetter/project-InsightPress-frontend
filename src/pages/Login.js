@@ -28,11 +28,9 @@ const Login = () => {
         axios
             .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/login`, data)
             .then((res) => {
-                console.log(res);
                 if (res.data.statusCode === 200) {
                     sessionStorage.setItem("JWT_TOKEN", res.data.body);
                     sessionStorage.setItem("user_id", id);
-                    //   console.log(id);
                     //   dispatch(setUserId(id));
                     alert("Welcome to InsightPress!");
                     navigate("/");
@@ -44,7 +42,7 @@ const Login = () => {
                     );
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {});
     };
 
     const handleKeyPress = (e) => {

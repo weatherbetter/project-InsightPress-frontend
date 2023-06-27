@@ -19,7 +19,6 @@ const EditPage = ({ onSave, onCancel }) => {
                             token: token,
                         }
                     );
-                    console.log(response);
                     if (response.data.statusCode === 200) {
                         setUserInfo(response.data.body);
                         setUsername(response.data.body.username);
@@ -39,13 +38,6 @@ const EditPage = ({ onSave, onCancel }) => {
     }, []);
 
     const handleSave = () => {
-        console.log(sessionStorage.getItem("JWT_TOKEN"));
-        console.log({
-            token: sessionStorage.getItem("JWT_TOKEN"),
-            username: username,
-            email: email,
-            password: password,
-        });
         axios
             .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage`, {
                 token: sessionStorage.getItem("JWT_TOKEN"),
@@ -54,10 +46,6 @@ const EditPage = ({ onSave, onCancel }) => {
                 password: password,
             })
             .then((response) => {
-                console.log(
-                    "User information updated successfully:",
-                    response.data
-                );
                 // onSave(); // Call the onSave callback to perform additional actions if needed
                 alert("User info updated");
             })
