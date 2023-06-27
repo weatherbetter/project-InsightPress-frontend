@@ -8,6 +8,10 @@ function Newpost() {
         return state.updatePost;
     });
     const guide = updatePost.id ? "Update" : "New Post";
+    let user_id = useSelector((state) => {
+        return state.user_id;
+    });
+    console.log(user_id);
 
     function addPost(event) {
         event.preventDefault();
@@ -15,7 +19,7 @@ function Newpost() {
             .post(
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,
                 {
-                    user_id: event.target.user.value,
+                    user_id: user_id,
                     source_url: event.target.url.value,
                     category: event.target.category.value,
                 }
@@ -58,26 +62,24 @@ function Newpost() {
                         <form></form>
 
                         <form
-                            onSubmit={
-                                updatePost.id ? handlerUpdate : addPost
-                            }
+                            onSubmit={updatePost.id ? handlerUpdate : addPost}
                             className="php-email-form"
                         >
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <fieldset
-                                        disabled={
-                                            updatePost.id ? true : false
-                                        }
+                                        // disabled={updatePost.id ? true : false}
+                                        disabled
                                     >
                                         <input
                                             className="form-control"
                                             id="disabledTextInput"
                                             type="text"
-                                            placeholder="unauthorized"
-                                            defaultValue={updatePost.user_id}
+                                            // placeholder="unauthorized"
+                                            defaultValue={user_id}
                                             aria-label="default input example"
                                             name="user"
+                                            // value={user_id}
                                             required
                                         />
                                     </fieldset>

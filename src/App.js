@@ -14,7 +14,7 @@ import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLogin, setUpdatePost } from "./store.js";
+import { setIsLogin, setUpdatePost, setUserId } from "./store.js";
 import NaverLogin from "./pages/NaverLogin.js";
 import Footer from "./components/Footer.js";
 import Header from "./components/Header.js";
@@ -42,6 +42,11 @@ function App() {
             dispatch(setIsLogin(true));
         } else {
             dispatch(setIsLogin(false));
+        }
+        if (sessionStorage.getItem("user_id")) {
+            dispatch(setUserId(sessionStorage.getItem("user_id")));
+        } else {
+            dispatch(setUserId(""));
         }
     });
     console.log(user_id);

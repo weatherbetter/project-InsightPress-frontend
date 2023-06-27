@@ -88,15 +88,17 @@ const Header = () => {
                                 New Post
                             </a>
                         </li>
-                        <li>
-                            <a
-                                onClick={() => {
-                                    navigate("/signup");
-                                }}
-                            >
-                                Signup
-                            </a>
-                        </li>
+                        {isLogin ? null : (
+                            <li>
+                                <a
+                                    onClick={() => {
+                                        navigate("/signup");
+                                    }}
+                                >
+                                    Signup
+                                </a>
+                            </li>
+                        )}
                         <li>
                             {isLogin ? (
                                 <a
@@ -117,16 +119,17 @@ const Header = () => {
                                 </a>
                             )}
                         </li>
-                        {user_id ? <li>
-                            <a
-                                onClick={() => {
-                                    navigate("/MyPage");
-                                }}
-                            >
-                                {user_id}'s Mypage
-                            </a>
-                        </li> : null}
-                        
+                        {user_id ? (
+                            <li>
+                                <a
+                                    onClick={() => {
+                                        navigate("/MyPage");
+                                    }}
+                                >
+                                    {user_id}'s Mypage
+                                </a>
+                            </li>
+                        ) : null}
                     </ul>
                 </nav>
                 {/* <!-- .navbar --> */}

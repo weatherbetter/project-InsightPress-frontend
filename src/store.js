@@ -51,7 +51,7 @@ const isLogin = createSlice({
 
 const user_id = createSlice({
     name: "user_id",
-    initialState: "",
+    initialState: sessionStorage.getItem("user_id"),
     reducers: {
         setUserId(state, action) {
             return action.payload;

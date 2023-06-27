@@ -31,8 +31,9 @@ const Login = () => {
         console.log(res);
         if (res.data.statusCode === 200) {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
-          console.log(id);
-          dispatch(setUserId(id));
+          sessionStorage.setItem("user_id", id);
+        //   console.log(id);
+        //   dispatch(setUserId(id));
           alert('Welcome to InsightPress!');
           navigate("/");
           // redux 로 유저 id 저장!

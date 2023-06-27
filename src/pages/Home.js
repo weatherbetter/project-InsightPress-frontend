@@ -10,13 +10,12 @@ function Home() {
     });
 
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
-            .then((response) => {
-                console.log(JSON.parse(response.data.body));
-                setArticles(JSON.parse(response.data.body));
-            })
-            .catch((error) => {});
+        // axios
+        //     .get(`${process.env.REACT_APP_BOARD_API_URL}/articles`)
+        //     .then((response) => {
+        //         setArticles(JSON.parse(response.data.body));
+        //     })
+        //     .catch((error) => {});
     }, []);
 
     return (
