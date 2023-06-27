@@ -72,7 +72,6 @@ const Login = () => {
                     <form></form>
 
                     <form
-                        //   onSubmit={updatePost.id ? handlerUpdate : addPost}
                         className="php-email-form"
                     >
                         <div className="row">
