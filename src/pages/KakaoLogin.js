@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 const KakaoLogin = () => {
     const { Kakao } = window;
-
+    let navigate = useNavigate();
     // 액세스 토큰을 상태 변수로 선언
     // 로그인 버튼 출력 제어에 사용
     const [accessToken, setAccessToken] = useState("");
@@ -63,7 +63,7 @@ const KakaoLogin = () => {
                             const { kakao_account } = response;
                             console.log(kakao_account);
                             // 필드명 수정 필요
-                            localStorage.setItem(
+                            sessionStorage.setItem(
                                 "JWT_TOKEN",
                                 kakao_account.profile.nickname
                             );
@@ -73,6 +73,7 @@ const KakaoLogin = () => {
                             // );
                             // 홈(/) 화면으로 이동
                             // window.location.href = "/";
+                            navigate("/");
                         })
                         .catch((error) => {
                             console.log(error);
