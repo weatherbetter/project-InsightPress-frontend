@@ -36,34 +36,13 @@ function PostQueue() {
     navigate(`/updatepost/${resQueue.id}`);
   };
 
-  // useEffect(() => {
-  //   const token = sessionStorage.getItem("JWT_TOKEN");
-  //   if (token) {
-  //     axios
-  //       .get(
-  //         `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`,{
-  //            token:token, 
-  //       })
-  //       .then((response) => {
-  //          console.log(response);
-  //          if (response.data.statusCode === 200) {
-  //           requestQueues(res.data.body);
-  //          }
-  //       })
-  //         .catch((error) => {});
-  //         console.error("Please Login: ", error);
-  //     } else {
-  //     navigate("/login"); // Redirect to login page if token is missing
-  //   }
-  // }, []);
-
   useEffect(() => {
     const token = sessionStorage.getItem("JWT_TOKEN");
     if (token) {
         axios
-            .post(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`, {
-                token: token,
-            })
+            .post(`${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests`, )
+            //     token: token,
+            // })
             .then((res) => {
                 console.log(res);
                 if (res && res.status === 200) {
