@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import KakaoLogin from "./KakaoLogin";
 import NaverLogin from "./NaverLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserId } from "../store.js";
 
 const Login = () => {
+    let dispatch = useDispatch();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -28,8 +31,10 @@ const Login = () => {
         console.log(res);
         if (res.data.statusCode === 200) {
           sessionStorage.setItem("JWT_TOKEN", res.data.body);
-          window.location.href = "/";
+          console.log(id);
+          dispatch(setUserId(id));
           alert('Welcome to InsightPress!');
+          navigate("/");
           // redux 로 유저 id 저장!
           
         } else {

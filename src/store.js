@@ -49,15 +49,28 @@ const isLogin = createSlice({
     },
 });
 
+const user_id = createSlice({
+    name: "user_id",
+    initialState: "",
+    reducers: {
+        setUserId(state, action) {
+            return action.payload;
+        },
+    },
+});
+
+
 export let { setUpdatePost } = updatePost.actions;
 export let { setArticle_highlight } = article_highlight.actions;
 export let { setIsLogin } = isLogin.actions;
+export let { setUserId } = user_id.actions;
 
 export default configureStore({
     reducer: {
         updatePost: updatePost.reducer,
         article_category: article_category.reducer,
         article_highlight: article_highlight.reducer,
-        isLogin:isLogin.reducer
+        isLogin: isLogin.reducer,
+        user_id: user_id.reducer
     },
 });

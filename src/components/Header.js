@@ -1,6 +1,6 @@
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLogin, setUpdatePost } from "../store.js";
+import { setIsLogin, setUpdatePost, setUserId } from "../store.js";
 
 const Header = () => {
     let navigate = useNavigate();
@@ -8,9 +8,13 @@ const Header = () => {
     let isLogin = useSelector((state) => {
         return state.isLogin;
     });
+    let user_id = useSelector((state) => {
+        return state.user_id;
+    });
     const handlerLogout = (e) => {
         sessionStorage.clear();
         localStorage.clear();
+        dispatch(setUserId(""));
         navigate("/login");
     };
 
@@ -113,15 +117,16 @@ const Header = () => {
                                 </a>
                             )}
                         </li>
-                        <li>
+                        {user_id ? <li>
                             <a
                                 onClick={() => {
                                     navigate("/MyPage");
                                 }}
                             >
-                                MyPage
+                                {user_id}'s Mypage
                             </a>
-                        </li>
+                        </li> : null}
+                        
                     </ul>
                 </nav>
                 {/* <!-- .navbar --> */}

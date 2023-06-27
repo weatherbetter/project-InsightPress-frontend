@@ -25,6 +25,9 @@ function App() {
     let isLogin = useSelector((state) => {
         return state.isLogin;
     });
+    let user_id = useSelector((state) => {
+        return state.user_id;
+    });
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "/assets/js/main.js";
@@ -41,6 +44,7 @@ function App() {
             dispatch(setIsLogin(false));
         }
     });
+    console.log(user_id);
 
     return (
         <>
