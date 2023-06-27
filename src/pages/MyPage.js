@@ -5,6 +5,28 @@ import { Outlet, Link, Navigate } from "react-router-dom";
 function MyPage() {
     const [userInfo, setUserInfo] = useState(null);
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("JWT_TOKEN");
+        if (token) {
+            axios
+                .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`, {
+                    token: token,
+                })
+                .then((res) => {
+                    console.log(res);
+                    if (res.data.statusCode === 200) {
+                        setUserInfo(res.data.body);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Failed to fetch user data:", error);
+                    setUserInfo(null);
+                });
+        } else {
+            setUserInfo(null);
+        }
+    }, []);
+
     const handleEdit = () => {
         // Navigate to the edit page
         // Use the 'Navigate' component from react-router-dom
@@ -36,28 +58,6 @@ function MyPage() {
             </div>
         );
     };
-
-    useEffect(() => {
-        const token = sessionStorage.getItem("JWT_TOKEN");
-        if (token) {
-            axios
-                .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/mypage`, {
-                    token: token,
-                })
-                .then((res) => {
-                    console.log(res);
-                    if (res.data.statusCode === 200) {
-                        setUserInfo(res.data.body);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Failed to fetch user data:", error);
-                    setUserInfo(null);
-                });
-        } else {
-            setUserInfo(null);
-        }
-    }, []);
 
     if (!userInfo) {
         return <div>Please Login</div>;
