@@ -15,7 +15,7 @@ import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLogin } from "./store.js";
-/* import NaverLogin from "./pages/NaverLogin.js"; */
+import NaverLogin from "./pages/NaverLogin.js"; 
 
 function App() {
     let navigate = useNavigate();
@@ -205,6 +205,12 @@ function App() {
                     </Routes>
                 </div>
             </main>
+
+
+            <div style={{textAlign: 'center', padding: '30px'}}>
+                <NaverLogin />
+            </div> 
+
         </>
     );
 }
