@@ -28,15 +28,8 @@ function App() {
     }
 
     useEffect(() => {
-<<<<<<< HEAD
         console.log(sessionStorage.getItem("JWT_TOKEN"))
         if (sessionStorage.getItem("JWT_TOKEN")) {
-=======
-
-      
-        
-        if (localStorage.getItem("JWT_TOKEN")) {
->>>>>>> ebd7508068290bcde07c1adbf55f168ec3da35da
             setIsLogin(true);
         } else {
             setIsLogin(false);
