@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import KakaoLogin from "./KakaoLogin";
+import NaverLogin from "./NaverLogin";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -31,7 +32,7 @@ const Login = () => {
           alert('Welcome to InsightPress!');
         } else {
           sessionStorage.clear();
-          alert('Oops, Your account does not exist or the password is incorrect.');
+          alert('Oops, Your account does not exist or wrong password');
         }
       })
       .catch((err) => console.log(err));
@@ -79,6 +80,10 @@ const Login = () => {
           <div style={{ textAlign: "center", padding: "30px" }}>
               <KakaoLogin /> {/* 카카로 로그인 컴포넌트 추가 */}
           </div>
+
+          <div style={{ textAlign: "center", padding: "30px" }}>
+                <NaverLogin />
+            </div>
       </div>
   );
 };

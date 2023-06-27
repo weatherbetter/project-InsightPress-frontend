@@ -25,6 +25,7 @@ function App() {
     });
 
     useEffect(() => {
+        console.log(sessionStorage.getItem("JWT_TOKEN"))
         if (sessionStorage.getItem("JWT_TOKEN")) {
             dispatch(setIsLogin(true));
         } else {
@@ -33,7 +34,8 @@ function App() {
     });
 
     const handlerLogout = e => {
-        sessionStorage.clear();  
+        sessionStorage.clear(); 
+        localStorage.clear(); 
         navigate("/login");      
     };
 
@@ -199,10 +201,10 @@ function App() {
                             path="/kakaoLogin"
                             element={<KakaoLogin exact={true} />}
                         />
-                        {/* <Route 
+                        <Route 
                             path="/NaverLogin"
                             element={<NaverLogin exact={true} />}
-                        /> */}
+                        />
                         <Route path="/EditPage" element={<EditPage />} />
                         <Route path="/Withdraw" element={<Withdraw />} />
                         <Route path="*" element={<Error404></Error404>} />
@@ -210,9 +212,6 @@ function App() {
                 </div>
             </main>
 
-            <div style={{ textAlign: "center", padding: "30px" }}>
-                <NaverLogin />
-            </div>
         </>
     );
 }
