@@ -4,6 +4,10 @@ import { useSelector } from "react-redux";
 
 function Newpost() {
     let navigate = useNavigate();
+    const token = sessionStorage.getItem("JWT_TOKEN");
+    if (!token) {
+        navigate("/login");
+    }
     let updatePost = useSelector((state) => {
         return state.updatePost;
     });
