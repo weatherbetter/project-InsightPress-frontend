@@ -19,9 +19,24 @@ function App() {
     // 로그인 여부
     const [isLogin, setIsLogin] = useState(false);
 
+    const mobileNavToogleButton = document.querySelector(".mobile-nav-toggle");
+
+    if (mobileNavToogleButton) {
+        mobileNavToogleButton.addEventListener("click", function (event) {
+            console.log(111)
+        });
+    }
+
     useEffect(() => {
+<<<<<<< HEAD
         console.log(sessionStorage.getItem("JWT_TOKEN"))
         if (sessionStorage.getItem("JWT_TOKEN")) {
+=======
+
+      
+        
+        if (localStorage.getItem("JWT_TOKEN")) {
+>>>>>>> ebd7508068290bcde07c1adbf55f168ec3da35da
             setIsLogin(true);
         } else {
             setIsLogin(false);
@@ -150,6 +165,11 @@ function App() {
 
         </>
     );
+    
+  const script = document.createElement("script");
+  script.src = `${process.env.PUBLIC_URL}/assets/js/main.js`;
+  document.body.appendChild(script);
+
 }
 
 export default App;
