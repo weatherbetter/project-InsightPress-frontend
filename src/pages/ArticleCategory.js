@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ArticleCategory() {
+    const navigate = useNavigate();
     const pagination = 5; // 페이지 넘버링 수
     const pagination_before_after = 2; // 페이지 넘버링 앞 뒤 수
     const [currentPage, setCurrentPage] = useState(1);
@@ -13,8 +15,7 @@ function ArticleCategory() {
     const article_category = useSelector((state) => {
         return state.article_category;
     });
-    const [articles, setArticles] = useState(
-        [
+    const [articles, setArticles] = useState([
         {
             article_id: "3dbds",
             category: 0,
@@ -39,8 +40,7 @@ function ArticleCategory() {
             source_url:
                 "https://n.news.naver.com/mnews/hotissue/article/277/0005274196?type=series&cid=1089768",
         },
-    ]
-    );
+    ]);
 
     useEffect(() => {
         //     axios
@@ -72,6 +72,11 @@ function ArticleCategory() {
                         <h2>
                             {article_category[searchParams.get("category")]}
                         </h2>
+                        <div>
+                            <a onClick={() => {navigate("/")}} className="more">
+                                See Headline
+                            </a>
+                        </div>
                     </div>
 
                     <div className="row">

@@ -24,11 +24,6 @@ function Home() {
                 <div className="container">
                     <div className="section-header d-flex justify-content-between align-items-center mb-5">
                         <h2>Headline</h2>
-                        <div>
-                            <a href="#" className="more">
-                                See All Business
-                            </a>
-                        </div>
                     </div>
 
                     <div className="row">
