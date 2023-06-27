@@ -1,8 +1,8 @@
-import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home.js";
 import Article from "./pages/Article.js";
 import Newpost from "./pages/Newpost.js";
+import "./App.css";
 import PostQueue from "./pages/PostQueue.js";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
@@ -13,46 +13,59 @@ import ArticleCategory from "./pages/ArticleCategory.js";
 import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
-import NaverLogin from "./pages/NaverLogin.js"
+import { useDispatch, useSelector } from "react-redux";
+import { setIsLogin } from "./store.js";
+/* import NaverLogin from "./pages/NaverLogin.js"; */
 
 function App() {
-    // 로그인 여부
-    const [isLogin, setIsLogin] = useState(false);
-
-    const mobileNavToogleButton = document.querySelector(".mobile-nav-toggle");
-
-    if (mobileNavToogleButton) {
-        mobileNavToogleButton.addEventListener("click", function (event) {
-            console.log(111)
-        });
-    }
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
+    let isLogin = useSelector((state) => {
+        return state.isLogin;
+    });
 
     useEffect(() => {
-
-      
-        
-        if (localStorage.getItem("JWT_TOKEN")) {
-            setIsLogin(true);
+        if (sessionStorage.getItem("JWT_TOKEN")) {
+            dispatch(setIsLogin(true));
         } else {
-            setIsLogin(false);
+            dispatch(setIsLogin(false));
         }
     });
 
+    const handlerLogout = e => {
+        sessionStorage.clear();  
+        navigate("/login");      
+    };
+
     return (
         <>
+            {/* <div style={{textAign: 'center', padding: '30px'}}>
+                <NaverLogin/>
+            </div> */}
             {/* <!-- ======= Header ======= --> */}
             <header
                 id="header"
                 className="header d-flex align-items-center fixed-top"
             >
                 <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
-                    <a href="/" className="logo d-flex align-items-center">
+                    <a
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                        className="logo d-flex align-items-center"
+                    >
                         <h1>InsightPress</h1>
                     </a>
                     <nav id="navbar" className="navbar">
                         <ul>
                             <li>
-                                <a href="/">Home</a>
+                                <a
+                                    onClick={() => {
+                                        navigate("/");
+                                    }}
+                                >
+                                    Home
+                                </a>
                             </li>
                             <li className="dropdown">
                                 <a href="#">
@@ -61,30 +74,80 @@ function App() {
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="/article?category=0">정치</a>
+                                        <a
+                                            onClick={() => {
+                                                navigate("/article?category=0");
+                                            }}
+                                        >
+                                            정치
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="/article?category=1">경제</a>
+                                        <a
+                                            onClick={() => {
+                                                navigate("/article?category=1");
+                                            }}
+                                        >
+                                            경제
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="/postqueue">Post queue</a>
-                            </li>
-                            <li>
-                                <a href="/newpost">New Post</a>
-                            </li>
-                            <li>
-                                <a href="/signup">Signup</a>
-                            </li>
-                            <li>
-                                <a href="/login">
-                                    {" "}
-                                    {isLogin ? "Login" : "Logout"}
+                                <a
+                                    onClick={() => {
+                                        navigate("/postqueue");
+                                    }}
+                                >
+                                    Post queue
                                 </a>
                             </li>
                             <li>
-                                <a href="/MyPage">MyPage</a>
+                                <a
+                                    onClick={() => {
+                                        navigate("/newpost");
+                                    }}
+                                >
+                                    New Post
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    onClick={() => {
+                                        navigate("/signup");
+                                    }}
+                                >
+                                    Signup
+                                </a>
+                            </li>
+                            <li>
+                                {isLogin ? (
+                                    <a
+                                        onClick={() => {
+                                            handlerLogout();
+                                            navigate("/login");
+                                        }}
+                                    >
+                                        Logout
+                                    </a>
+                                ) : (
+                                    <a
+                                        onClick={() => {
+                                            navigate("/login");
+                                        }}
+                                    >
+                                        Login
+                                    </a>
+                                )}
+                            </li>
+                            <li>
+                                <a
+                                    onClick={() => {
+                                        navigate("/MyPage");
+                                    }}
+                                >
+                                    MyPage
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -132,10 +195,10 @@ function App() {
                             path="/kakaoLogin"
                             element={<KakaoLogin exact={true} />}
                         />
-                        <Route 
+                        {/* <Route 
                             path="/NaverLogin"
                             element={<NaverLogin exact={true} />}
-                        />
+                        /> */}
                         <Route path="/EditPage" element={<EditPage />} />
                         <Route path="/Withdraw" element={<Withdraw />} />
                         <Route path="*" element={<Error404></Error404>} />
@@ -144,11 +207,6 @@ function App() {
             </main>
         </>
     );
-    
-  const script = document.createElement("script");
-  script.src = `${process.env.PUBLIC_URL}/assets/js/main.js`;
-  document.body.appendChild(script);
-
 }
 
 export default App;
