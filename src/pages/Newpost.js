@@ -28,7 +28,6 @@ function Newpost() {
 
     function handlerUpdate(event) {
         event.preventDefault();
-        console.log(updatePost.id);
         return axios
             .put(
                 `${process.env.REACT_APP_BOARD_API_URL}/articles/customer-requests/${updatePost.id}`,

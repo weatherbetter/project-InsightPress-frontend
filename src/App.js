@@ -14,7 +14,7 @@ import Error404 from "./pages/Error404.js";
 import KakaoLogin from "./pages/KakaoLogin.js";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLogin } from "./store.js";
+import { setIsLogin, setUpdatePost } from "./store.js";
 import NaverLogin from "./pages/NaverLogin.js"; 
 
 function App() {
@@ -105,6 +105,7 @@ function App() {
                             <li>
                                 <a
                                     onClick={() => {
+                                        dispatch(setUpdatePost({}));
                                         navigate("/newpost");
                                     }}
                                 >
@@ -185,7 +186,10 @@ function App() {
                             element={<ArticleCategory></ArticleCategory>}
                         />
                         <Route path="/article/:id" element={<Article />} />
-                        <Route path="/newpost" element={<Newpost />} />
+                        <Route
+                            path="/newpost"
+                            element={<Newpost/>}
+                        />
                         <Route path="/updatepost/:id" element={<Newpost />} />
                         <Route path="/postqueue" element={<PostQueue />} />
                         <Route path="/login" element={<Login />} />
@@ -206,11 +210,9 @@ function App() {
                 </div>
             </main>
 
-
-            <div style={{textAlign: 'center', padding: '30px'}}>
+            <div style={{ textAlign: "center", padding: "30px" }}>
                 <NaverLogin />
-            </div> 
-
+            </div>
         </>
     );
 }
