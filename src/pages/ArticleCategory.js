@@ -18,24 +18,35 @@ function ArticleCategory() {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-            axios
-                .get(`${process.env.REACT_APP_BOARD_API_URL}/articles?category=${searchParams.get("category")}`)
-                .then((response) => {
-                    setArticles(JSON.parse(response.data.body.articles));
-                     setTotalPageCount(
-                         response.data.body.total_page_count
-                     );
-                })
-                .catch((error) => {});
-    }, []);
+        axios
+            .get(
+                `${
+                    process.env.REACT_APP_BOARD_API_URL
+                }/articles?category=${searchParams.get(
+                    "category"
+                )}&page=1`
+            )
+            .then((response) => {
+                setArticles(JSON.parse(response.data.body.articles));
+                setTotalPageCount(response.data.body.total_page_count);
+            })
+            .catch((error) => {});
+        // }, [currentPage, searchParams.get("category")]);
+    }, [searchParams.get("category")]);
 
     const move_page = (sidePage) => {
         setCurrentPage(sidePage);
             axios
-                .get(`${process.env.REACT_APP_BOARD_API_URL}/articles?category=${searchParams.get("category")}&page=${sidePage}`)
+                .get(
+                    `${
+                        process.env.REACT_APP_BOARD_API_URL
+                    }/articles?category=${searchParams.get(
+                        "category"
+                    )}&page=${sidePage}`
+                )
                 .then((response) => {
                     setArticles(JSON.parse(response.data.body.articles));
-        setTotalPageCount(response.data.body.total_page_count);
+                    setTotalPageCount(response.data.body.total_page_count);
                 })
                 .catch((error) => {});
     };
@@ -81,7 +92,7 @@ function ArticleCategory() {
                                     </div>
                                     <h2 className="mb-2">
                                         <Link
-                                            to={`/article/${article.article_id}`}
+                                            to={`/article/${article.id}`}
                                         >
                                             {article.title}
                                         </Link>
