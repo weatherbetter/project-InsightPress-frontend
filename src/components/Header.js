@@ -90,12 +90,16 @@ const Header = () => {
                         </li>
                         {isLogin ? null : (
                             <li>
-                                <a
-                                    onClick={() => {
+                                {/* <a href ="#"
+                                    onClick={(e) => {
+                                        e.preventDefault(); 
                                         navigate("/signup");
                                     }}
                                 >
                                     Signup
+                                </a> */}
+                                <a href="#" onClick={e => { e.preventDefault(); navigate("/signup"); }}> 
+	                            Signup
                                 </a>
                             </li>
                         )}

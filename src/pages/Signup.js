@@ -1,7 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const [id, setId] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -13,27 +19,85 @@ const Signup = () => {
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
 
-    const handleSignup = () => {
-        //   const data = {
-        //     id,
-        //     username,
-        //     email,
-        //     password,
-        //   };
+    // const handleSignup = () => {
+    //     //   const data = {
+    //     //     id,
+    //     //     username,
+    //     //     email,
+    //     //     password,
+    //     //   };
 
+    //     axios
+    //         .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/signup`, {
+    //         "body":{
+    //             userid: id,
+    //             username: username,
+    //             email: email,
+    //             password: password,}
+    //         })
+    //         .then((res) => {
+    //          setSignupSuccess(true); // Set the signup success state
+    //          sessionStorage.setItem(res.data.body);
+    //          // showInputData(); // Call the function to display input data
+    //          alert("Sign Up Sucessfully!");
+    //          navigate("/")
+    //         }) else {
+    //             sessionStorage.resetItem(res.data.body);
+    //             alert(
+    //                 "Oops, Try again with your new id and password"
+    //             );
+    //         }
+    //     })
+    //     .catch((err) => {});
+    // };
+
+
+    // const handleSignup = () => {
+    //     axios
+    //       .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/signup`, {
+    //         body: {
+    //           userid: id,
+    //           username: username,
+    //           email: email,
+    //           password: password,
+    //         },
+    //       })
+    //       .then((response) => {
+    //         setSignupSuccess(true); // Set the signup success state
+    //         sessionStorage.setItem(response.data.body);
+    //         // showInputData(); // Call the function to display input data
+    //         alert("Sign Up Sucessfully!");
+    //         navigate("/");
+    //       }) // Add opening curly brace here
+    //       .catch((err) => {
+    //         sessionStorage.resetItem(err.response.data.body);
+    //         alert("Oops, Try again with your new id and password");
+    //       });
+    //   };
+      
+    const handleSignup = e => {
+        e.preventDefault();
+        
         axios
-            .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/signup`, {
-                userid: id,
-                username: username,
-                email: email,
-                password: password,
-            })
-            .then((res) => {
-                // setSignupSuccess(true); // Set the signup success state
-                // showInputData(); // Call the function to display input data
-            })
-            .catch((err) => {});
-    };
+          .post(`${process.env.REACT_APP_BOARD_API_URL}/auth/signup`, {
+            userid: id,
+            username: username,
+            email: email,
+            password: password,
+          })
+          .then((response) => {
+            setSignupSuccess(true); // Set the signup success state
+            sessionStorage.setItem("key", response.data.body);
+            // showInputData(); // Call the function to display input data
+            alert("Sign Up Successfully!");
+            navigate("/");
+          })
+          .catch((err) => {
+            sessionStorage.removeItem("key");
+            alert("Oops, Try again with your new id and password");
+          });
+      };
+      
 
     // const showInputData = () => {
     //   console.log("ID:", id);
