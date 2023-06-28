@@ -37,28 +37,51 @@ const Withdraw = ({ onWithdraw, onCancel }) => {
         fetchUserInfo();
     }, []);
 
+    // const handleWithdraw = () => {
+    //     axios
+    //         .delete(`${process.env.REACT_APP_BOARD_API_URL}/auth/withdraw/${sessionStorage.getItem("JWT_TOKEN")} )`
+                
+    //             // token: sessionStorage.removeItem("JWT_TOKEN"),
+    //             // username: username,
+    //             // email: email,
+    //             // password: password,
+                
+            
+    //         .then((response) => {
+    //             // onSave(); // Call the onSave callback to perform additional actions if needed
+    //             alert("User info deleted. Hope To See You Again!");
+    //         })
+    //         .catch((error) => {
+    //             console.error("User information delete failed:", error);
+    //         });
+    // };
+
+    // const navigate = useNavigate();
+
+    // const handleCancel = () => {
+    //     navigate("/MyPage");
+    // };
+
     const handleWithdraw = () => {
+        const token = sessionStorage.getItem("JWT_TOKEN");
         axios
-            .delete(`${process.env.REACT_APP_BOARD_API_URL}/auth/withdraw`, {
-                token: sessionStorage.getItem("JWT_TOKEN"),
-                username: username,
-                email: email,
-                password: password,
-            })
-            .then((response) => {
-                // onSave(); // Call the onSave callback to perform additional actions if needed
-                alert("User info deleted. Hope To See You Again!");
-            })
-            .catch((error) => {
-                console.error("User information delete failed:", error);
-            });
-    };
-
-    const navigate = useNavigate();
-
-    const handleCancel = () => {
+          .delete(`${process.env.REACT_APP_BOARD_API_URL}/auth/withdraw/${token}`, { headers: { authorization: token } })
+          .then((response) => {
+            // onSave(); // Call the onSave callback to perform additional actions if needed
+            sessionStorage.clear();
+            alert("User info deleted. Hope To See You Again!");
+          })
+          .catch((error) => {
+            console.error("User information delete failed:", error);
+          });
+      };
+      
+      const navigate = useNavigate();
+      
+      const handleCancel = () => {
         navigate("/MyPage");
-    };
+      };
+      
 
     return (
         <div className="container">

@@ -85,6 +85,15 @@ const EditPage = ({ onSave, onCancel }) => {
                         <div className="">
                             <div>
                                 <h5 className="card-title">Profile Details</h5>
+                                <div className="alert alert-warning" role="alert">
+                                    <p>
+                                        Your PW needs to contain at 6 or more
+                                        characters, including at least one uppercase
+                                        letter, one lowercase letters, one digit, and
+                                        one special character.
+                                    </p>
+                                </div>
+
                                 <div className="row mb-3">
                                     <label
                                         htmlFor="renewPassword"

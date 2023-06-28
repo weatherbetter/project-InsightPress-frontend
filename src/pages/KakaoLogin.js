@@ -34,7 +34,7 @@ const KakaoLogin = () => {
                     {
                         grant_type: "authorization_code", // 고정
                         client_id: JAVASCRIPT_APP_KEY, // 앱 REST API 키
-                        redirect_uri: "http://localhost:3000/kakaoLogin", // 인가 코드가 리다이렉트된 URI
+                        redirect_uri: "http://insightpress-s3-deploy-auto.s3-website-eu-west-1.amazonaws.com/kakaoLogin", // 인가 코드가 리다이렉트된 URI
                         code: code, // 인가 코드 받기 요청으로 얻은 인가 코드
                     },
                     {

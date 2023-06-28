@@ -5,7 +5,7 @@ const NaverLogin = () => {
   let navigate = useNavigate();
 
   const NAVER_CLIENT_ID = 'IIWXnToZFXFW8le6dvfY';
-  const NAVER_CALLBACK_URL = 'http://localhost:3000/login';
+  const NAVER_CALLBACK_URL = 'http://insightpress-s3-deploy-auto.s3-website-eu-west-1.amazonaws.com/NaverLogin';
 
 //   const [userInfo, setUserInfo] = useState(null);
 
