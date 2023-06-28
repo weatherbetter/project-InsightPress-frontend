@@ -37,28 +37,54 @@ const EditPage = ({ onSave, onCancel }) => {
         fetchUserInfo();
     }, []);
 
+    // const handleSave = () => {
+    //     axios
+            
+    //         .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage/${token}`, {
+    //             // token: sessionStorage.getItem("JWT_TOKEN"),
+    //             const token = sessionStorage.getItem("JWT_TOKEN");
+
+    //             username: username,
+    //             password: password,
+    //         })
+    //         .then((response) => {
+    //             // onSave(); // Call the onSave callback to perform additional actions if needed
+    //             alert("User info updated");
+    //         })
+    //         .catch((error) => {
+    //             console.error("User information update failed:", error);
+    //         });
+    // };
+
+    // const navigate = useNavigate();
+
+    // const handleCancel = () => {
+    //     navigate("/MyPage");
+    // };
+
     const handleSave = () => {
+        const token = sessionStorage.getItem("JWT_TOKEN");
+        
         axios
-            .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage`, {
-                token: sessionStorage.getItem("JWT_TOKEN"),
-                username: username,
-                email: email,
-                password: password,
-            })
-            .then((response) => {
-                // onSave(); // Call the onSave callback to perform additional actions if needed
-                alert("User info updated");
-            })
-            .catch((error) => {
-                console.error("User information update failed:", error);
-            });
-    };
-
-    const navigate = useNavigate();
-
-    const handleCancel = () => {
+          .put(`${process.env.REACT_APP_BOARD_API_URL}/auth/editpage/${token}`, {
+            username: username,
+            password: password,
+          })
+          .then((response) => {
+            // onSave(); // Call the onSave callback to perform additional actions if needed
+            alert("User info updated");
+          })
+          .catch((error) => {
+            console.error("User information update failed:", error);
+          });
+      };
+      
+      const navigate = useNavigate();
+      
+      const handleCancel = () => {
         navigate("/MyPage");
-    };
+      };
+      
 
     return (
         <div className="container">
