@@ -13,7 +13,7 @@ const KakaoLogin = () => {
         // 간편 로그인을 요청
         // 인증 성공 시 redirectUri 주소로 인가 코드를 전달
         Kakao.Auth.authorize({
-            redirectUri: "http://localhost:3000/kakaoLogin",
+            redirectUri: "http://insightpress-s3-deploy-auto.s3-website-eu-west-1.amazonaws.com/kakaoLogin",
         });
     };
 
